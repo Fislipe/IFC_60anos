@@ -3,212 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./site/css/estilo.css" rel="stylesheet">
+    <title>IFC 60 Anos | Memórias e Conquistas</title>
+    
     <link rel="icon" type="image/png" href="./site/imagens/logoprojeto.png">
+    
+    <!-- Modern Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <!-- <script src="./site/js/script.js" defer></script>  -->
-    <!-- <script src="./site/js/carrosselPessoas.js" defer></script>    -->
-     <script src="./site/js/carossel.js" defer></script>
-    <title>Página Inicial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link href="./site/css/estilo.css" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script src="./site/js/carossel.js" defer></script>
 </head>
 <body>
     <header class="site-header">
         <nav class="navbar">
             <ul class="nav-left">
-            <li><a href="./index.html">Página Inicial</a></li>
-            <li><a href="./site/paginas/linhadoTempo.html">História</a></li>
-            <li><a href="./site/paginas/galeria.html">Galeria</a></li>
+                <li><a href="./index.html">Início</a></li>
+                <li><a href="./site/paginas/linhadoTempo.html">História</a></li>
+                <li><a href="./site/paginas/galeria.html">Galeria</a></li>
             </ul>
 
             <div class="logo-wrap">
-            <a href="index.html" class="logo-link">
-                <img src="./site/imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
-            </a>
+                <a href="index.html" class="logo-link">
+                    <img src="./site/imagens/logoprojeto.png" alt="IFC 60 Anos Logo" class="logo-img">
+                </a>
             </div>
 
             <ul class="nav-right">
-            <li><a href="./site/paginas/textosdeMemorias.html">Textos de memórias</a></li>
-            <li><a href="./site/paginas/entrevistas.html">Entrevistas</a></li>
-
+                <li><a href="./site/paginas/textosdeMemorias.html">Memórias</a></li>
+                <li><a href="./site/paginas/entrevistas.html">Entrevistas</a></li>
+                <li><a href="./site/paginas/pesquisa.html">Pesquisa</a></li>
             </ul>
         </nav>
     </header>
 
-   <section class="carousel">
+    <main>
+        <!-- Hero Carousel Section -->
+        <section class="carousel">
+            <div class="carousel-track" id="carrossel-1">
+                <!-- Slide 1 -->
+                <div class="slide active">
+                    <img src="./site/imagens/depenandoGalinha1969 (1).jpg" alt="IFC Histórico 1969">
+                    <div class="slide-texto">
+                        <h1>IFC Campus Concórdia</h1>
+                        <p>Uma história iniciada em 1964, forjada na inovação do campo e na ciência aplicada à agricultura familiar.</p>
+                    </div>
+                </div>
 
-    <div class="carousel-track" id="carrossel-1">
-        <!-- Slide 1 -->
-        <div class="slide active">
-            <img src="./site/imagens/depenandoGalinha1969 (1).jpg" alt="Foto 1">
-            <div class="slide-texto">
-                <h1>O IFC Campus Concórdia</h1>
-                <p>O IFC Campus Concórdia tem uma longa história, iniciada em 1964, com a fundação do Colégio Agrícola...</p>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="./site/imagens/formaturaPrimeiraTurma (1).jpg" alt="Formatura Primeira Turma">
+                    <div class="slide-texto">
+                        <h1>60 Anos de Trajetória</h1>
+                        <p>O legado que transformou famílias e impulsionou o desenvolvimento regional através da educação.</p>
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <img src="./site/imagens/EAgrotecnica.jpg" alt="Escola Agrotécnica">
+                    <div class="slide-texto">
+                        <h1>Tradição e Futuro</h1>
+                        <p>Mantendo vivo o compromisso com a excelência acadêmica e a integração com a comunidade.</p>
+                    </div>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="slide">
+                    <img src="./site/imagens/refeitório.jpg" alt="Refeitório Histórico">
+                    <div class="slide-texto">
+                        <h1>Nossas Raízes</h1>
+                        <p>Cada espaço do campus guarda memórias de gerações que construíram nossa identidade.</p>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <!-- Slide 2 -->
-        <div class="slide">
-            <img src="./site/imagens/formaturaPrimeiraTurma (1).jpg" alt="Foto 2">
-            <div class="slide-texto">
-                <h1>Uma trajetória de 60 anos</h1>
-                <p>O campus contribuiu de forma fundamental no desenvolvimento das famílias da região...</p>
+            <!-- Carousel Navigation -->
+            <div class="carousel-indicators" id="indicadores-1">
+                <span class="indicator active"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
             </div>
-        </div>
 
-        <!-- Slide 3 -->
-        <div class="slide">
-            <img src="./site/imagens/EAgrotecnica.jpg" alt="Foto 3">
-            <div class="slide-texto">
-                <h1>Tradição e Inovação</h1>
-                <p>O legado do campus se mantém vivo através das gerações...</p>
+            <button class="arrow left" onclick="primeiro.slideAnterior()">&#10094;</button>
+            <button class="arrow right" onclick="primeiro.proximoSlide()">&#10095;</button>
+        </section>
+
+        <!-- Statistics Section -->
+        <section class="secEstimativas">
+            <h1>60 ANOS DE EXCELÊNCIA</h1>
+            <p>
+                Desde a fundação como Colégio Agrícola, o IFC Concórdia tem sido o farol da inovação para as famílias da região. Nossa ciência aplicada transformou o campo e abriu horizontes para milhares de jovens talentos.
+            </p>
+
+            <div class="secao2estimativas">
+                <div class="estimativa">
+                    <p class="numero">60</p>
+                    <p>Anos de História</p>
+                </div>
+                <div class="estimativa">
+                    <p class="numero">15k+</p>
+                    <p>Alunos Formados</p>
+                </div>
+                <div class="estimativa">
+                    <p class="numero">50+</p>
+                    <p>Projetos de Extensão</p>
+                </div>
+                <div class="estimativa">
+                    <p class="numero">100%</p>
+                    <p>Comprometimento</p>
+                </div>
             </div>
-        </div>
+        </section>
 
-        <!-- Slide 4 -->
-        <div class="slide">
-            <img src="./site/imagens/refeitório.jpg" alt="Foto 4">
-            <div class="slide-texto">
-                <h1>Tradição e Inovação</h1>
-                <p>O legado do campus se mantém vivo através das gerações...</p>
+        <!-- Timeline Call to Action -->
+        <section class="secLinhadoTempo">
+            <h1>Linha do Tempo</h1>
+            <div class="botaoLinhadoTempo">
+                <a href="./site/paginas/linhadoTempo.html">Explorar nossa trajetória 🡢</a>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- Bolinhas de navegação -->
-    <div class="carousel-indicators" id="indicadores-1">
-        <span class="indicator"></span>
-        <span class="indicator"></span>
-        <span class="indicator"></span>
-        <span class="indicator"></span>
-    </div>
-
-    <!-- Setas -->
-    <button class="arrow left" onclick="primeiro.slideAnterior()">&#10094;</button>
-    <button class="arrow right" onclick="primeiro.proximoSlide()">&#10095;</button>
-
-    </section>
-
-    <section class="secEstimativas">
-        <h1 class="h1Branco"> 60 ANOS DO CAMPUS</h1>
-        <p>
-            O IFC Campus Concórdia tem uma longa história, iniciada em 1964, 
-            com a fundação do Colégio Agrícola, oferencendo na época somente o 
-            curso de mestre agrícola e não ofertava ensino médio. O que ofertava 
-            era exatamente o que as famílias da região precisavam, inovação no campo, 
-            ciência aplicada à agricultura familiar. Assim, o colégio teve um papel 
-            importantíssimo no desenvolvimento das famílias da região, ajudando os 
-            jovens a ajudarem suas famílias. 
-        </p>
-
-        <div class="secao2estimativas">
-            <div class="estimativa">
-                <p class="numero">00000</p>
-                <p>Número de alunos formados</p>
+        <!-- Navigation Links Section -->
+        <section class="secDirecionamentos">
+            <h1>Descubra Nosso Acervo</h1>
+            <div class="direcionamentos">
+                <a href="./site/paginas/galeria.html" class="direcionamento">
+                    <img src="./site/imagens/icones/igaleria.png" alt="Galeria">
+                    <h2>Acervo de Fotos</h2>
+                    <p>Veja como nosso campus evoluiu através das décadas.</p>
+                </a>
+                <a href="./site/paginas/entrevistas.html" class="direcionamento">
+                    <img src="./site/imagens/icones/ientrevista.png" alt="Entrevistas">
+                    <h2>Entrevistas</h2>
+                    <p>Relatos emocionantes de quem ajudou a escrever nossa história.</p>
+                </a>
+                <a href="./site/paginas/textosdeMemorias.html" class="direcionamento">
+                    <img src="./site/imagens/icones/itextos.png" alt="Memórias">
+                    <h2>Textos de Memórias</h2>
+                    <p>O olhar das novas gerações sobre o legado dos pioneiros.</p>
+                </a>
+                <a href="./site/paginas/pesquisa.html" class="direcionamento">
+                    <img src="./site/imagens/icones/iestatistica.png" alt="Pesquisa">
+                    <h2>Pesquisa</h2>
+                    <p>Dados e indicadores que comprovam nosso impacto social.</p>
+                </a> 
             </div>
-            <div class="estimativa">
-                <p class="numero">00000</p>
-                <p>Número de alunos formados</p>
+        </section>
+
+        <!-- People Carousel Section -->
+        <section class="secPessoas">
+            <h1>Vozes da Nossa História</h1>
+            
+            <div class="carrossel-pessoas">
+                <div class="carousel-track" id="carrossel-2">
+                    <!-- Slide 1 -->
+                    <div class="slide-pessoa active">
+                        <img src="./site/imagens/EAgrotecnica.jpg" alt="Colaborador">
+                        <div class="slide-texto-pessoa">
+                            <p>Nome do Protagonista</p>
+                            <p class="minibio">"O IFC não é apenas uma escola, é uma família que transforma vidas através do conhecimento e da prática."</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="slide-pessoa">
+                        <img src="./site/imagens/formaturaPrimeiraTurma (1).jpg" alt="Ex-aluno">
+                        <div class="slide-texto-pessoa">
+                            <p>Um Novo Horizonte</p>
+                            <p class="minibio">Buscando sempre a inovação, mantendo o respeito pelas nossas origens agrárias.</p>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="slide-pessoa">
+                        <img src="./site/imagens/depenandoGalinha1969 (1).jpg" alt="Histórico">
+                        <div class="slide-texto-pessoa">
+                            <p>Evolução Constante</p>
+                            <p class="minibio">Desde 1964, cada dia é uma nova oportunidade de aprender e crescer juntos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="arrow left" onclick="segundo.slideAnterior()">&#10094;</button>
+                <button class="arrow right" onclick="segundo.proximoSlide()">&#10095;</button>
             </div>
-            <div class="estimativa">
-                <p class="numero">00000</p>
-                <p>Número de alunos formados</p>
-            </div>
-            <div class="estimativa">
-                <p class="numero">00000</p>
-                <p>Número de alunos formados</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="secLinhadoTempo">
-        <h1 class="h1Vermelho">LINHA DO TEMPO</h1>
-        <button class="botaoLinhadoTempo"><a href="./site/paginas/linhadoTempo.html">Ver linha do tempo 🡢</a></button>
-    </section>
-
-    <section class="secDirecionamentos">
-        <h1>Conheça nossa história:</h1>
-        <div class="direcionamentos">
-        <a href="./site/paginas/galeria.html" class="direcionamento">
-            <img src="./site/imagens/icones/igaleria.png" alt="fotos">
-            <h2>Acervo de fotos</h2>
-            <p>Veja como nosso campus mudou com o tempo</p>
-        </a>
-        <a href="./site/paginas/entrevistas.html" class="direcionamento">
-            <img src="./site/imagens/icones/ientrevista.png" alt="entrevistas">
-            <h2>Entrevistas</h2>
-            <p>com ex-servidores, alunos, enfim, com quem escreveu a história do campus</p>
-        </a>
-        <a href="./site/paginas/textosdeMemorias.html" class="direcionamento">
-            <img src="./site/imagens/icones/itextos.png" alt="textos">
-            <h2>Textos de memórias</h2>
-            <p>Alunos atuais escrevendo sobre os alunos de antigamente</p>
-        </a>
-        <a href="./site/paginas/pesquisa.html" class="direcionamento">
-            <img src="./site/imagens/icones/iestatistica.png" alt="pesquisa">
-            <h2>Pesquisa</h2>
-            <p>Resultados da pesquisa realizada durante o projeto</p>
-        </a> 
-    </div>
-    </section>
-
-    <section class="secPessoas">
-    <h1>Pessoas que já passaram por aqui:</h1>
-    
-    <section class="carrossel-pessoas" >
-
-    <div class="carousel-track" id="carrossel-2">
-        <!-- Slide 1 -->
-        <div class="slide-pessoa active">
-            <img src="./site/imagens/EAgrotecnica.jpg" alt="Foto 1">
-            <div class="slide-texto-pessoa">
-                <p>Nome da pessoa slide 1</p>
-                <p class="minibio">Mini biografia e/ou fala da pessoa</p>
-            </div>
-        </div>
-
-        <!-- Slide 2 -->
-        <div class="slide-pessoa">
-            <img src="./site/imagens/formaturaPrimeiraTurma (1).jpg" alt="Foto 2">
-            <div class="slide-texto-pessoa">
-                <p>Nome da pessoa slide 2</p>
-                <p class="minibio">Mini biografia e/ou fala da pessoa</p>
-            </div>
-        </div>
-
-        <!-- Slide 3 -->
-        <div class="slide-pessoa">
-            <img src="./site/imagens/depenandoGalinha1969 (1).jpg" alt="Foto 3">
-            <div class="slide-texto-pessoa">
-                <p>Nome da pessoa slide 3</p>
-                <p class="minibio">Mini biografia e/ou fala da pessoa</p>
-            </div>
-        </div>
-
-    </div>
-
-
-    <!-- Setas -->
-    <button class="arrow left" onclick="segundo.slideAnterior()">&#10094;</button>
-    <button class="arrow right" onclick="segundo.proximoSlide()">&#10095;</button>
-
-    </section>
-
-    </section>
+        </section>
+    </main>
 
     <footer>
-        <img src="./site/imagens/logoprojeto.png" alt="logoprojeto">
-        <div class="links">
-            <a href="./site/paginas/entrevistas.html">Entrevistas</a>
-            <a href="./site/paginas/galeria.html">Galeria</a>
-            <a href="./site/paginas/textosdeMemorias.html">Textos de memórias</a>
-            <a href="./site/paginas/linhadoTempo.html">Linha do tempo</a>
-            <a href="mailto:ifcmemorias60@gmail.com">Nosso email</a>
+        <div class="footer-content">
+            <img src="./site/imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
+            
+            <div class="links">
+                <a href="./site/paginas/entrevistas.html">Entrevistas</a>
+                <a href="./site/paginas/galeria.html">Galeria</a>
+                <a href="./site/paginas/textosdeMemorias.html">Memórias</a>
+                <a href="./site/paginas/linhadoTempo.html">História</a>
+                <a href="mailto:ifcmemorias60@gmail.com">Contato</a>
+            </div>
+
+            <div class="logo-bottom">
+                <a href="https://concordia.ifc.edu.br/" target="_blank">
+                    <img src="./site/imagens/logo if.png" alt="Logo IFC Campus Concórdia">
+                </a>
+            </div>
         </div>
-        <a href="https://concordia.ifc.edu.br/"><img src="./site/imagens/logo if.png" alt="logo if"></a>
+        <div style="opacity: 0.5; font-size: 14px; margin-top: 20px;">
+            &copy; 2024 IFC Campus Concórdia - 60 Anos de História
+        </div>
     </footer>
-
 </body>
-
 </html>
