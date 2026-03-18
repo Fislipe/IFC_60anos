@@ -1,104 +1,589 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/animacoes.css" rel="stylesheet">
-    <link href="../css/estilo.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../imagens/logoprojeto.png">
-    <link href="../css/entrevistas.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <script src="../js/animacoes.js" defer></script>
     <title>Vozes — IFC 60 Anos</title>
-</head>
-<body>
-    <header class="site-header">
-        <nav class="navbar">
-            <ul class="nav-left">
-                <li><a href="../../index.html">Página Inicial</a></li>
-                <li><a href="./linhadoTempo.html">História</a></li>
-                <li><a href="./galeria.html">Galeria</a></li>
-            </ul>
-            <div class="logo-wrap">
-                <a href="../../index.html" class="logo-link">
-                    <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
-                </a>
-            </div>
-            <ul class="nav-right">
-                <li><a href="./textosdeMemorias.html">Memórias</a></li>
-                <li><a href="./entrevistas.html" class="active">Entrevistas</a></li>
-            </ul>
-            <button class="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </nav>
-    </header>
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <nav class="mobile-menu">
-        <ul>
-            <li><a href="../../index.html">Página Inicial</a></li>
+        :root {
+            --cream: #f5f0e8;
+            --ink: #0e0e0e;
+            --green: #1a3c2e;
+            --gold: #b8943f;
+            --gold-lt: #d4af6a;
+            --muted: #6b6b5e;
+            --border: rgba(14, 14, 14, .12);
+            --serif: 'Cormorant Garamond', Georgia, serif;
+            --sans: 'DM Sans', sans-serif;
+            --ease: cubic-bezier(.25, .46, .45, .94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--ink);
+            font-family: var(--sans);
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+            opacity: .5;
+        }
+
+        /* NAVBAR */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.6rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background .4s var(--ease), padding .4s var(--ease);
+        }
+
+        .site-header.scrolled {
+            background: rgba(245, 240, 232, .92);
+            backdrop-filter: blur(12px);
+            padding: 1rem 3rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 36px;
+            opacity: .9;
+        }
+
+        .nav-logo span {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--green);
+            letter-spacing: .02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: .78rem;
+            font-weight: 400;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+            position: relative;
+            opacity: .6;
+            transition: opacity .25s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s var(--ease);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            opacity: 1;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            transform: scaleX(1);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--ink);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 98;
+            background: var(--green);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--cream);
+            text-decoration: none;
+            opacity: .85;
+        }
+
+        .mobile-menu a:hover {
+            opacity: 1;
+        }
+
+        /* PAGE HERO */
+        .page-hero {
+            height: 44vh;
+            min-height: 340px;
+            background: var(--green);
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5rem 4.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 3rem;
+            bottom: 10%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+        }
+
+        .page-hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(.25) saturate(.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: block;
+            font-size: .68rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: .8rem;
+        }
+
+        .page-hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 300;
+            color: #fff;
+            line-height: 1;
+            letter-spacing: -.01em;
+        }
+
+        .page-hero h1 em {
+            font-style: italic;
+            color: var(--gold-lt);
+        }
+
+        /* INTRO */
+        .section-intro {
+            padding: 5rem 5rem 3rem;
+            max-width: 680px;
+        }
+
+        .section-intro p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--muted);
+        }
+
+        /* ENTREVISTAS */
+        .entrevistas-list {
+            padding: 0 0 6rem;
+        }
+
+        .entrevista-item {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-top: 1px solid var(--border);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .7s var(--ease), transform .7s var(--ease);
+        }
+
+        .entrevista-item.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .entrevista-item:last-child {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .entrevista-text {
+            padding: 4rem 5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            justify-content: center;
+            border-right: 1px solid var(--border);
+        }
+
+        .entrevista-item.invert .entrevista-text {
+            order: 2;
+            border-right: none;
+            border-left: 1px solid var(--border);
+        }
+
+        .entrevista-item.invert .entrevista-media {
+            order: 1;
+        }
+
+        .entrevista-num {
+            font-family: var(--serif);
+            font-size: 5rem;
+            font-weight: 300;
+            color: var(--gold);
+            opacity: .2;
+            line-height: 1;
+        }
+
+        .entrevista-title {
+            font-family: var(--serif);
+            font-size: 2rem;
+            font-weight: 400;
+            line-height: 1.15;
+        }
+
+        .entrevista-desc {
+            font-size: .9rem;
+            line-height: 1.8;
+            color: var(--muted);
+            max-width: 380px;
+        }
+
+        .btn-transcricao {
+            display: inline-flex;
+            align-items: center;
+            gap: .7rem;
+            padding: .75rem 1.8rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: .72rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            transition: all .3s var(--ease);
+            align-self: flex-start;
+            margin-top: .5rem;
+        }
+
+        .btn-transcricao:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        .entrevista-media {
+            padding: 3rem 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .media-img {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+
+        .media-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: sepia(.15) saturate(.8);
+            transition: transform .5s var(--ease), filter .3s;
+        }
+
+        .media-img:hover img {
+            transform: scale(1.03);
+            filter: sepia(0) saturate(1);
+        }
+
+        .media-img iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .audio-player {
+            width: 100%;
+            height: 40px;
+            accent-color: var(--gold);
+            filter: sepia(.3);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--green);
+            padding: 4rem 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .footer-brand img {
+            height: 44px;
+            opacity: .85;
+        }
+
+        .footer-brand p {
+            font-size: .72rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .4);
+            margin-top: .6rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: .72rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            text-decoration: none;
+            transition: color .25s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-lt);
+        }
+
+        .footer-logo img {
+            height: 38px;
+            opacity: .6;
+            transition: opacity .25s;
+        }
+
+        .footer-logo:hover img {
+            opacity: 1;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .page-hero {
+                padding: 0 2rem 3rem;
+            }
+
+            .page-hero::before {
+                display: none;
+            }
+
+            .section-intro {
+                padding: 3rem 2rem 2rem;
+            }
+
+            .entrevista-item {
+                grid-template-columns: 1fr;
+            }
+
+            .entrevista-text,
+            .entrevista-media {
+                padding: 2.5rem 2rem;
+                border: none !important;
+                border-bottom: 1px solid var(--border) !important;
+            }
+
+            .entrevista-item.invert .entrevista-text {
+                order: unset;
+            }
+
+            .entrevista-item.invert .entrevista-media {
+                order: unset;
+            }
+
+            footer {
+                flex-direction: column;
+                padding: 3rem 2rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header" id="siteHeader">
+        <a href="../index.html" class="nav-logo">
+            <img src="../imagens/logoprojeto.png" alt="IFC Concórdia">
+            <span>IFC Concórdia</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Início</a></li>
             <li><a href="./linhadoTempo.html">História</a></li>
             <li><a href="./galeria.html">Galeria</a></li>
             <li><a href="./textosdeMemorias.html">Memórias</a></li>
-            <li><a href="./entrevistas.html">Entrevistas</a></li>
+            <li><a href="./entrevistas.html" class="active">Entrevistas</a></li>
         </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </header>
+
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="../index.html">Início</a>
+        <a href="./linhadoTempo.html">História</a>
+        <a href="./galeria.html">Galeria</a>
+        <a href="./textosdeMemorias.html">Memórias</a>
+        <a href="./entrevistas.html">Entrevistas</a>
     </nav>
 
-    <div class="Entrevistas">
-        <p class="subheading reveal">Relatos Orais</p>
-        <h1 class="reveal">Vozes do Campus</h1>
-        <p class="reveal">Testemunhos emocionantes de quem ajudou a construir a história de seis décadas do IFC Campus Concórdia.</p>
-        
-        <div class="entrevista-container">
-            <!-- Entrevista 1 -->
-            <div class="entrevista-item reveal">
-                <div class="entrevista-content text-area">
-                    <h2 class="entrevista-titulo">Memórias do Início</h2>
-                    <p class="mini-bio">Entrevista com os primeiros servidores da Escola Agrotécnica, relatando os desafios da década de 60.</p>
-                </div>
-                <div class="entrevista-marker"></div>
-                <div class="entrevista-content midia-area">
-                    <div class="midia-wrapper">
-                        <img src="../imagens/inauguraçãoCampo.jpg" alt="Entrevista Histórica">
-                    </div>
-                    <audio controls class="audio-player">
-                        <source src="#" type="audio/mpeg">
-                    </audio>
-                    <a href="./transcrições/transcricao1.html" class="btn-transcricao">Ler Transcrição</a>
-                </div>
-            </div>
+    <section class="page-hero">
+        <img class="page-hero-bg" src="../imagens/inauguraçãoCampo.jpg" alt="">
+        <div class="hero-content">
+            <span class="eyebrow">Relatos Orais</span>
+            <h1>Vozes do<br><em>Campus</em></h1>
+        </div>
+    </section>
 
-            <!-- Entrevista 2 (Invertida) -->
-            <div class="entrevista-item invert reveal">
-                <div class="entrevista-content text-area">
-                    <h2 class="entrevista-titulo">Evolução e Tecnologia</h2>
-                    <p class="mini-bio">Depoimentos sobre a transição para o Instituto Federal e a modernização dos laboratórios e campos experimentais.</p>
+    <div class="section-intro">
+        <p>Testemunhos emocionantes de quem ajudou a construir a história de seis décadas do IFC Campus Concórdia.</p>
+    </div>
+
+    <section class="entrevistas-list">
+
+        <div class="entrevista-item">
+            <div class="entrevista-text">
+                <span class="entrevista-num">01</span>
+                <h2 class="entrevista-title">Memórias do Início</h2>
+                <p class="entrevista-desc">Entrevista com os primeiros servidores da Escola Agrotécnica, relatando os
+                    desafios da década de 60.</p>
+                <a href="./transcrições/transcricao1.html" class="btn-transcricao">Ler Transcrição →</a>
+            </div>
+            <div class="entrevista-media">
+                <div class="media-img">
+                    <img src="../imagens/inauguraçãoCampo.jpg" alt="Entrevista Histórica">
                 </div>
-                <div class="entrevista-marker"></div>
-                <div class="entrevista-content midia-area">
-                    <div class="midia-wrapper">
-                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
-                    </div>
-                    <a href="#" class="btn-transcricao">Transcrição em Breve</a>
+                <audio controls class="audio-player">
+                    <source src="#" type="audio/mpeg">
+                </audio>
+            </div>
+        </div>
+
+        <div class="entrevista-item invert">
+            <div class="entrevista-text">
+                <span class="entrevista-num">02</span>
+                <h2 class="entrevista-title">Evolução e Tecnologia</h2>
+                <p class="entrevista-desc">Depoimentos sobre a transição para o Instituto Federal e a modernização dos
+                    laboratórios e campos experimentais.</p>
+                <a href="#" class="btn-transcricao">Transcrição em Breve</a>
+            </div>
+            <div class="entrevista-media">
+                <div class="media-img" style="aspect-ratio:16/9;">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
-    </div>
+
+    </section>
 
     <footer>
         <div class="footer-brand">
             <img src="../imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
-            <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">IFC Campus Concórdia — 60 Anos</p>
+            <p>IFC Campus Concórdia — 60 Anos de História</p>
         </div>
-        <div class="links">
-            <a href="./entrevistas.html">Vozes</a>
-            <a href="./galeria.html">Galeria</a>
-            <a href="./textosdeMemorias.html">Memórias</a>
-            <a href="./linhadoTempo.html">História</a>
-        </div>
-        <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="Logo IFC"></a>
+        <ul class="footer-links">
+            <li><a href="./entrevistas.html">Vozes</a></li>
+            <li><a href="./galeria.html">Galeria</a></li>
+            <li><a href="./textosdeMemorias.html">Memórias</a></li>
+            <li><a href="./linhadoTempo.html">História</a></li>
+        </ul>
+        <a href="https://concordia.ifc.edu.br/" class="footer-logo" target="_blank">
+            <img src="../imagens/logo if.png" alt="Logo IFC">
+        </a>
     </footer>
+
+    <script>
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
+        document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+        document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open')));
+        const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+        document.querySelectorAll('.entrevista-item').forEach(el => obs.observe(el));
+    </script>
 </body>
+
 </html>

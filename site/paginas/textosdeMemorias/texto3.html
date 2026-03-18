@@ -4,52 +4,516 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../../css/estilo.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../../imagens/logoprojeto.png">
-    <link href="../../css/textosdeMemorias.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
         rel="stylesheet">
-    <title>Texto de Memória</title>
+    <title>Texto de Memória — IFC 60 Anos</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #f5f0e8;
+            --ink: #0e0e0e;
+            --green: #1a3c2e;
+            --gold: #b8943f;
+            --gold-lt: #d4af6a;
+            --muted: #6b6b5e;
+            --border: rgba(14, 14, 14, .12);
+            --serif: 'Cormorant Garamond', Georgia, serif;
+            --sans: 'DM Sans', sans-serif;
+            --ease: cubic-bezier(.25, .46, .45, .94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--ink);
+            font-family: var(--sans);
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+            opacity: .5;
+        }
+
+        /* NAVBAR */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.6rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background .4s var(--ease), padding .4s var(--ease);
+        }
+
+        .site-header.scrolled {
+            background: rgba(245, 240, 232, .92);
+            backdrop-filter: blur(12px);
+            padding: 1rem 3rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 36px;
+            opacity: .9;
+        }
+
+        .nav-logo span {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--green);
+            letter-spacing: .02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: .78rem;
+            font-weight: 400;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+            position: relative;
+            opacity: .6;
+            transition: opacity .25s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s var(--ease);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            opacity: 1;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            transform: scaleX(1);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--ink);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 98;
+            background: var(--green);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--cream);
+            text-decoration: none;
+            opacity: .85;
+        }
+
+        .mobile-menu a:hover {
+            opacity: 1;
+        }
+
+        /* READING PROGRESS */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 200;
+            height: 2px;
+            background: var(--gold);
+            width: 0%;
+            transition: width .1s linear;
+        }
+
+        /* BACK BUTTON */
+        .btn-voltar {
+            position: fixed;
+            bottom: 2.5rem;
+            left: 2.5rem;
+            z-index: 50;
+            width: 44px;
+            height: 44px;
+            background: var(--green);
+            color: var(--gold-lt);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, .1);
+            transition: all .3s var(--ease);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .2);
+        }
+
+        .btn-voltar:hover {
+            background: var(--gold);
+            color: #000;
+            transform: translateX(-3px);
+        }
+
+        /* PAGE LAYOUT */
+        .page-wrap {
+            display: grid;
+            grid-template-columns: 1fr minmax(0, 660px) 1fr;
+            padding-top: 8rem;
+        }
+
+        .page-wrap>* {
+            grid-column: 2;
+        }
+
+        /* ARTICLE HEADER */
+        .article-header {
+            padding: 3rem 0 2.5rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .7s var(--ease), transform .7s var(--ease);
+        }
+
+        .article-header.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .meta-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .meta-eyebrow::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .meta-eyebrow span {
+            font-size: .68rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .article-title {
+            font-family: var(--serif);
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 300;
+            line-height: 1.05;
+            letter-spacing: -.01em;
+            margin-bottom: 1.5rem;
+        }
+
+        .article-byline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .byline-item {
+            display: flex;
+            flex-direction: column;
+            gap: .2rem;
+        }
+
+        .byline-label {
+            font-size: .65rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--gold);
+        }
+
+        .byline-value {
+            font-size: .9rem;
+            color: var(--ink);
+        }
+
+        /* ARTICLE BODY */
+        .article-body {
+            padding-bottom: 6rem;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .7s var(--ease) .15s, transform .7s var(--ease) .15s;
+        }
+
+        .article-body.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* First letter drop cap */
+        .article-body>p:first-child::first-letter {
+            font-family: var(--serif);
+            font-size: 4.5rem;
+            font-weight: 400;
+            float: left;
+            line-height: .75;
+            margin: .08em .12em 0 0;
+            color: var(--green);
+        }
+
+        .article-body>p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: #2a2a2a;
+            margin-bottom: 1.6rem;
+            font-weight: 300;
+        }
+
+        .article-body>p:empty {
+            display: none;
+        }
+
+        /* pull quote — add class="destaque" to any <p> to highlight it */
+        .article-body>p.destaque {
+            font-family: var(--serif);
+            font-size: 1.45rem;
+            font-style: italic;
+            font-weight: 300;
+            line-height: 1.55;
+            color: var(--green);
+            border-left: 3px solid var(--gold);
+            padding: 1.2rem 1.8rem;
+            margin: 2.5rem 0;
+            background: rgba(184, 148, 63, .05);
+        }
+
+        /* section divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2.5rem 0;
+            color: var(--gold);
+            opacity: .4;
+            font-size: .7rem;
+            letter-spacing: .3em;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--green);
+            padding: 4rem 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .footer-brand img {
+            height: 44px;
+            opacity: .85;
+        }
+
+        .footer-brand p {
+            font-size: .72rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .4);
+            margin-top: .6rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: .72rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            text-decoration: none;
+            transition: color .25s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-lt);
+        }
+
+        .footer-logo img {
+            height: 38px;
+            opacity: .6;
+            transition: opacity .25s;
+        }
+
+        .footer-logo:hover img {
+            opacity: 1;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .page-wrap {
+                grid-template-columns: 1fr;
+                padding: 6rem 1.5rem 0;
+            }
+
+            .page-wrap>* {
+                grid-column: 1;
+            }
+
+            footer {
+                flex-direction: column;
+                padding: 3rem 2rem;
+                align-items: flex-start;
+            }
+
+            .btn-voltar {
+                bottom: 1.5rem;
+                left: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header class="site-header">
-        <nav class="navbar">
-            <ul class="nav-left">
-                <li><a href="../../../index.html">Página Inicial</a></li>
-                <li><a href="./linhadoTempo.html">História</a></li>
-                <li><a href="./galeria.html">Galeria</a></li>
-            </ul>
 
-            <div class="logo-wrap">
-                <a href="../../../index.html" class="logo-link">
-                    <img src="../../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
-                </a>
-            </div>
+    <div class="progress-bar" id="progressBar"></div>
 
-            <ul class="nav-right">
-                <li><a href="../textosdeMemorias.html">Textos de memórias</a></li>
-                <li><a href="../entrevistas.html">Entrevistas</a></li>
-
-            </ul>
-        </nav>
+    <header class="site-header" id="siteHeader">
+        <a href="../../../index.html" class="nav-logo">
+            <img src="../../imagens/logoprojeto.png" alt="IFC Concórdia">
+            <span>IFC Concórdia</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../../../index.html">Início</a></li>
+            <li><a href="../linhadoTempo.html">História</a></li>
+            <li><a href="../galeria.html">Galeria</a></li>
+            <li><a href="../textosdeMemorias.html" class="active">Memórias</a></li>
+            <li><a href="../entrevistas.html">Entrevistas</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </header>
 
-    <a href="javascript:history.back()" class="botao-voltar">←</a>
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="../../../index.html">Início</a>
+        <a href="../linhadoTempo.html">História</a>
+        <a href="../galeria.html">Galeria</a>
+        <a href="../textosdeMemorias.html">Memórias</a>
+        <a href="../entrevistas.html">Entrevistas</a>
+    </nav>
 
-    <div class="textosdeMemorias">
-        <h1>Título do texto de Memória</h1>
-        <h2>De:</h2>
-        <h2>Sobre:</h2>
-        <article class="texto-memoria">
+    <a href="javascript:history.back()" class="btn-voltar" title="Voltar">←</a>
+
+    <main class="page-wrap">
+
+        <header class="article-header" id="articleHeader">
+            <div class="meta-eyebrow"><span>Texto de Memória</span></div>
+            <h1 class="article-title">Título do Texto<br>de Memória</h1>
+            <div class="article-byline">
+                <div class="byline-item">
+                    <span class="byline-label">Autor(a)</span>
+                    <span class="byline-value">Nome do Autor</span>
+                </div>
+                <div class="byline-item">
+                    <span class="byline-label">Sobre</span>
+                    <span class="byline-value">Tema ou assunto</span>
+                </div>
+            </div>
+        </header>
+
+        <article class="article-body" id="articleBody">
+
             <p>Sílvia: Olha, 60 anos do Campus Concórdia, um projeto que a gente tem no ensino, pesquisa e extensão,
                 e essa é a parte da pesquisa, né? Conversar com ex-servidores, com ex-alunos, para coletar dados e para
                 a gente também pensar, escrever um pouco das memórias da escola, é essa a ideia. Então, Helena, você
                 foi servidora aqui no Campus, hoje já aposentada, você se apresenta, fala quem é você, onde você mora,
                 filhos, quanto tempo trabalhou aqui?</p>
+
             <p>Helena: Sim, sim. Tá, meu nome é Helena Kritzmann, eu me aposentei agora, no passado, em junho.
                 Trabalhei 37 anos aqui no Instituto, vim morar no Instituto em 1985, com 16 anos, fiz concurso
                 dois anos depois que eu estava aqui dentro. Quando vim morar, meu filho tinha cinco meses, agora
@@ -58,40 +522,69 @@
                 37 anos só aqui no Instituto, foi o meu único emprego, não trabalhei em outro lugar.
                 Trabalhei antes de estagiária, meses assim, na prefeitura, mas depois de ter idade, 18 anos,
                 eu entrei com 19 aqui no Instituto, na escola agrotécnica, era a escola agrotécnica.</p>
-            <p>Isso foi em 85?
 
-                87. Eu tentei trabalhar, eu vim morar em 85, porque daí meu ex-marido fez concurso e passou.
-                Minha família toda fez concurso, é bem engraçada a história, até posso contar como foi.</p>
+            <p>Isso foi em 85? — 87. Eu tentei trabalhar, eu vim morar em 85, porque daí meu ex-marido fez concurso
+                e passou. Minha família toda fez concurso, é bem engraçada a história, até posso contar como foi.</p>
+
+            <p class="destaque">"Trabalhei 37 anos só aqui no Instituto — foi o meu único emprego, não trabalhei em
+                outro lugar."</p>
+
             <p>Nós morávamos ali em Concórdia. O pai trabalhava numa empresa de construção, na prefeitura eu
                 acho que ele trabalhava, se não me engano, e a escola estava procurando funcionários. Tinha
                 a Elisete Benetti, que estava à cata de gente, tipo a laço procurando, porque como a escola
                 era muito longe, ninguém gostava de trabalhar aqui, porque daí se tu morasse no centro, a
-                condução era o ônibus do Instituto, trazia de manhã e levava de volta de noite. Quem não tinha
-                cara era nesse termo assim que a gente usava. Aí a Elisete pagou várias, como é que diz,
-                aquelas que pagam no banco, as GRU, ela pagou, não sei se chamava isso, ela pagou várias,
-                tudo que era coisa, porque era diferente a forma do concurso. Aí ela pediu para o pai se
-                o pai não queria fazer, o pai disse:”eu faço, mas aí eu tenho que levar filho, genro, irmã,
-                não sei o que lá, tem que levar família.” Aí o pai fez para carpintaria, a minha irmã fez
-                para técnica administração, o namorado dela, que era o Valdir Morche, nessa época, fez para
-                mecânico, meu ex-marido fez para almoxarife, e eu e a minha mãe não fizemos, porque eu não
-                tinha idade, e a minha mãe era bastante doente, ela não fez. Aí ela pagou para todos, porque
-                as quatro fechavam o banco, e era três e meia, mais ou menos, ela pagou para todos, e a gente
-                veio fazer o concurso.</p>
-            <p></p>
-            <p></p>
+                condução era o ônibus do Instituto, trazia de manhã e levava de volta de noite.</p>
+
+            <p>Aí a Elisete pagou várias, como é que diz, aquelas que pagam no banco, as GRU, ela pagou, não sei
+                se chamava isso, ela pagou várias, tudo que era coisa, porque era diferente a forma do concurso.
+                Aí ela pediu para o pai se o pai não queria fazer, o pai disse: "eu faço, mas aí eu tenho que levar
+                filho, genro, irmã, não sei o que lá, tem que levar família." Aí o pai fez para carpintaria, a minha
+                irmã fez para técnica administração, o namorado dela, que era o Valdir Morche, nessa época, fez para
+                mecânico, meu ex-marido fez para almoxarife, e eu e a minha mãe não fizemos, porque eu não tinha
+                idade, e a minha mãe era bastante doente, ela não fez. Aí ela pagou para todos, porque as quatro
+                fechavam o banco, e era três e meia, mais ou menos, ela pagou para todos, e a gente veio fazer o
+                concurso.</p>
+
+            <div class="divider">✦</div>
+
+            <!-- Continue adicionando parágrafos abaixo conforme necessário -->
+
         </article>
-    </div>
+
+    </main>
+
     <footer>
-        <img src="../../imagens/logoprojeto.png" alt="logoprojeto">
-        <div class="links">
-            <a href="../entrevistas.html">Entrevistas</a>
-            <a href="../galeria.html">Galeria</a>
-            <a href="../textosdeMemorias.html">Textos de memórias</a>
-            <a href="../linhadoTempo.html">Linha do tempo</a>
-            <a href="mailto:ifcmemorias60@gmail.com">Nosso email</a>
+        <div class="footer-brand">
+            <img src="../../imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
+            <p>IFC Campus Concórdia — 60 Anos de História</p>
         </div>
-        <a href="https://concordia.ifc.edu.br/"><img src="../../imagens/logo if.png" alt="logo if"></a>
+        <ul class="footer-links">
+            <li><a href="../entrevistas.html">Entrevistas</a></li>
+            <li><a href="../galeria.html">Galeria</a></li>
+            <li><a href="../textosdeMemorias.html">Memórias</a></li>
+            <li><a href="../linhadoTempo.html">História</a></li>
+            <li><a href="mailto:ifcmemorias60@gmail.com">Contato</a></li>
+        </ul>
+        <a href="https://concordia.ifc.edu.br/" class="footer-logo" target="_blank">
+            <img src="../../imagens/logo if.png" alt="Logo IFC">
+        </a>
     </footer>
+
+    <script>
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
+        document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+        document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open')));
+        const bar = document.getElementById('progressBar');
+        window.addEventListener('scroll', () => {
+            const doc = document.documentElement;
+            bar.style.width = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight) * 100) + '%';
+        });
+        setTimeout(() => {
+            document.getElementById('articleHeader').classList.add('visible');
+            document.getElementById('articleBody').classList.add('visible');
+        }, 120);
+    </script>
 </body>
 
 </html>

@@ -1,59 +1,436 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="../imagens/logoprojeto.png">
-    <link href="../css/animacoes.css" rel="stylesheet">
-    <link href="../css/estilo.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <script src="../js/animacoes.js" defer></script>
     <title>Pesquisa — IFC 60 Anos</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #f5f0e8;
+            --ink: #0e0e0e;
+            --green: #1a3c2e;
+            --gold: #b8943f;
+            --gold-lt: #d4af6a;
+            --muted: #6b6b5e;
+            --border: rgba(14, 14, 14, .12);
+            --serif: 'Cormorant Garamond', Georgia, serif;
+            --sans: 'DM Sans', sans-serif;
+            --ease: cubic-bezier(.25, .46, .45, .94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--green);
+            color: #fff;
+            font-family: var(--sans);
+            font-weight: 300;
+            overflow-x: hidden;
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.06'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+            opacity: .5;
+        }
+
+        /* NAVBAR */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.6rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background .4s var(--ease), padding .4s var(--ease);
+        }
+
+        .site-header.scrolled {
+            background: rgba(26, 60, 46, .95);
+            backdrop-filter: blur(12px);
+            padding: 1rem 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 36px;
+            opacity: .9;
+        }
+
+        .nav-logo span {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--gold-lt);
+            letter-spacing: .02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: .78rem;
+            font-weight: 400;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .6);
+            text-decoration: none;
+            position: relative;
+            transition: color .25s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s var(--ease);
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: rgba(255, 255, 255, .7);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 98;
+            background: #0a1f15;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--cream);
+            text-decoration: none;
+            opacity: .85;
+        }
+
+        .mobile-menu a:hover {
+            opacity: 1;
+        }
+
+        /* MAIN */
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 7rem 4rem 6rem;
+            position: relative;
+        }
+
+        /* decorative lines */
+        main::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 4rem;
+            bottom: 10%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+            opacity: .4;
+        }
+
+        .coming-soon-content {
+            max-width: 600px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .9s var(--ease), transform .9s var(--ease);
+        }
+
+        .coming-soon-content.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .cs-badge {
+            display: inline-block;
+            border: 1px solid rgba(184, 148, 63, .4);
+            padding: .4rem 1.2rem;
+            font-size: .65rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 2.5rem;
+        }
+
+        .cs-title {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1;
+            letter-spacing: -.01em;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .cs-title em {
+            font-style: italic;
+            color: var(--gold-lt);
+            display: block;
+        }
+
+        .cs-desc {
+            font-size: .95rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, .5);
+            max-width: 460px;
+            margin: 0 auto 3rem;
+        }
+
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: .7rem;
+            padding: .85rem 2.2rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: .75rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            transition: all .3s var(--ease);
+        }
+
+        .btn-back:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        /* big bg number */
+        .cs-bg-num {
+            position: absolute;
+            right: -2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--serif);
+            font-size: 30vw;
+            font-weight: 300;
+            line-height: 1;
+            color: rgba(255, 255, 255, .02);
+            pointer-events: none;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        /* FOOTER */
+        footer {
+            background: rgba(0, 0, 0, .2);
+            padding: 2.5rem 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, .06);
+        }
+
+        .footer-brand img {
+            height: 40px;
+            opacity: .7;
+        }
+
+        .footer-brand p {
+            font-size: .7rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .3);
+            margin-top: .5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: .7rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .35);
+            text-decoration: none;
+            transition: color .25s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-lt);
+        }
+
+        .footer-logo img {
+            height: 34px;
+            opacity: .4;
+            transition: opacity .25s;
+        }
+
+        .footer-logo:hover img {
+            opacity: .8;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            main::before {
+                display: none;
+            }
+
+            main {
+                padding: 5rem 2rem 4rem;
+            }
+
+            footer {
+                flex-direction: column;
+                padding: 2.5rem 2rem;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <header class="site-header">
-        <nav class="navbar">
-            <ul class="nav-left">
-                <li><a href="../../index.html">Página Inicial</a></li>
-                <li><a href="./linhadoTempo.html">História</a></li>
-                <li><a href="./galeria.html">Galeria</a></li>
-            </ul>
-            <div class="logo-wrap">
-                <a href="../../index.html" class="logo-link">
-                    <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
-                </a>
-            </div>
-            <ul class="nav-right">
-                <li><a href="./textosdeMemorias.html">Memórias</a></li>
-                <li><a href="./entrevistas.html">Entrevistas</a></li>
-            </ul>
-            <button class="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </nav>
+
+    <header class="site-header" id="siteHeader">
+        <a href="../index.html" class="nav-logo">
+            <img src="../imagens/logoprojeto.png" alt="IFC Concórdia">
+            <span>IFC Concórdia</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Início</a></li>
+            <li><a href="./linhadoTempo.html">História</a></li>
+            <li><a href="./galeria.html">Galeria</a></li>
+            <li><a href="./textosdeMemorias.html">Memórias</a></li>
+            <li><a href="./entrevistas.html">Entrevistas</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </header>
 
-    <main style="padding: 180px 4vw 100px; text-align: center; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <p class="subheading reveal">Em desenvolvimento</p>
-        <h1 class="reveal" style="font-family: 'Montaga', serif; font-size: 3.5rem; color: var(--brand-green); margin-bottom: 2rem;">Sistema de Busca</h1>
-        <p class="reveal" style="max-width: 600px; color: var(--text-muted);">Estamos centralizando o acervo digital de 60 anos para buscas inteligentes. Em breve você poderá pesquisar por nomes, datas e eventos específicos.</p>
-        <a href="../../index.html" class="botao-textomemoria reveal delay-1" style="margin-top: 3rem; text-decoration: none;">Voltar ao início</a>
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="../index.html">Início</a>
+        <a href="./linhadoTempo.html">História</a>
+        <a href="./galeria.html">Galeria</a>
+        <a href="./textosdeMemorias.html">Memórias</a>
+        <a href="./entrevistas.html">Entrevistas</a>
+    </nav>
+
+    <main>
+        <span class="cs-bg-num">60</span>
+        <div class="coming-soon-content" id="mainContent">
+            <span class="cs-badge">Em desenvolvimento</span>
+            <h1 class="cs-title">Sistema de<br><em>Busca</em></h1>
+            <p class="cs-desc">Estamos centralizando o acervo digital de 60 anos para buscas inteligentes. Em breve você
+                poderá pesquisar por nomes, datas e eventos específicos.</p>
+            <a href="../index.html" class="btn-back">← Voltar ao Início</a>
+        </div>
     </main>
 
     <footer>
         <div class="footer-brand">
             <img src="../imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
-            <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">IFC Campus Concórdia — 60 Anos</p>
+            <p>IFC Campus Concórdia — 60 Anos</p>
         </div>
-        <div class="links">
-            <a href="./entrevistas.html">Vozes</a>
-            <a href="./galeria.html">Galeria</a>
-            <a href="./textosdeMemorias.html">Memórias</a>
-            <a href="./linhadoTempo.html">História</a>
-        </div>
-        <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="Logo IFC"></a>
+        <ul class="footer-links">
+            <li><a href="./entrevistas.html">Vozes</a></li>
+            <li><a href="./galeria.html">Galeria</a></li>
+            <li><a href="./textosdeMemorias.html">Memórias</a></li>
+            <li><a href="./linhadoTempo.html">História</a></li>
+        </ul>
+        <a href="https://concordia.ifc.edu.br/" class="footer-logo" target="_blank">
+            <img src="../imagens/logo if.png" alt="Logo IFC">
+        </a>
     </footer>
+
+    <script>
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
+        document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+        document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open')));
+        // Animate on load
+        setTimeout(() => document.getElementById('mainContent').classList.add('visible'), 100);
+    </script>
 </body>
+
 </html>

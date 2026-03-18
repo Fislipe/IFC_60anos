@@ -1,56 +1,489 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/animacoes.css" rel="stylesheet">
-    <link href="../css/estilo.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../imagens/logoprojeto.png">
-    <link href="../css/galeria.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <script src="../js/galeriaBruno.js" defer></script>
     <script src="../js/animacoes.js" defer></script>
     <title>Galeria — IFC 60 Anos</title>
-</head>
-<body>
-    <header class="site-header">
-        <nav class="navbar">
-            <ul class="nav-left">
-                <li><a href="../../index.html">Página Inicial</a></li>
-                <li><a href="./linhadoTempo.html">História</a></li>
-                <li><a href="./galeria.html" class="active">Galeria</a></li>
-            </ul>
-            <div class="logo-wrap">
-                <a href="../../index.html" class="logo-link">
-                    <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
-                </a>
-            </div>
-            <ul class="nav-right">
-                <li><a href="./textosdeMemorias.html">Memórias</a></li>
-                <li><a href="./entrevistas.html">Entrevistas</a></li>
-            </ul>
-            <button class="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </nav>
-    </header>
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <nav class="mobile-menu">
-        <ul>
-            <li><a href="../../index.html">Página Inicial</a></li>
+        :root {
+            --cream: #f5f0e8;
+            --ink: #0e0e0e;
+            --green: #1a3c2e;
+            --gold: #b8943f;
+            --gold-lt: #d4af6a;
+            --muted: #6b6b5e;
+            --border: rgba(14, 14, 14, .12);
+            --serif: 'Cormorant Garamond', Georgia, serif;
+            --sans: 'DM Sans', sans-serif;
+            --ease: cubic-bezier(.25, .46, .45, .94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--ink);
+            font-family: var(--sans);
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+            opacity: .5;
+        }
+
+        /* NAVBAR */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.6rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background .4s var(--ease), padding .4s var(--ease);
+        }
+
+        .site-header.scrolled {
+            background: rgba(245, 240, 232, .92);
+            backdrop-filter: blur(12px);
+            padding: 1rem 3rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 36px;
+            opacity: .9;
+        }
+
+        .nav-logo span {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--green);
+            letter-spacing: .02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: .78rem;
+            font-weight: 400;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+            position: relative;
+            opacity: .6;
+            transition: opacity .25s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s var(--ease);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            opacity: 1;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            transform: scaleX(1);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--ink);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 98;
+            background: var(--green);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--cream);
+            text-decoration: none;
+            opacity: .85;
+        }
+
+        .mobile-menu a:hover {
+            opacity: 1;
+        }
+
+        /* PAGE HERO */
+        .page-hero {
+            height: 44vh;
+            min-height: 340px;
+            background: var(--green);
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5rem 4.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 3rem;
+            bottom: 10%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+        }
+
+        .page-hero-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(.25) saturate(.4);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .eyebrow {
+            display: block;
+            font-size: .68rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: .8rem;
+        }
+
+        .page-hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 300;
+            color: #fff;
+            line-height: 1;
+            letter-spacing: -.01em;
+        }
+
+        .page-hero h1 em {
+            font-style: italic;
+            color: var(--gold-lt);
+        }
+
+        /* FILTERS */
+        .filtros-bar {
+            padding: 2.5rem 5rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            border-bottom: 1px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .filtros-label {
+            font-size: .7rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        .tags-area {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: .4rem 1.1rem;
+            border: 1px solid var(--border);
+            background: none;
+            cursor: pointer;
+            font-family: var(--sans);
+            font-size: .72rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--muted);
+            transition: all .25s var(--ease);
+        }
+
+        .tag:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .tag.ativo {
+            background: var(--green);
+            border-color: var(--green);
+            color: var(--cream);
+        }
+
+        /* GALLERY GRID */
+        #galeria-wrapper {
+            padding: 3rem 4rem 6rem;
+        }
+
+        #galeria-container {
+            columns: 3;
+            column-gap: 1.2rem;
+        }
+
+        #galeria-container .foto-item {
+            break-inside: avoid;
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+            position: relative;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity .5s var(--ease), transform .5s var(--ease);
+        }
+
+        #galeria-container .foto-item.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        #galeria-container .foto-item img {
+            width: 100%;
+            display: block;
+            filter: sepia(.1) saturate(.85);
+            transition: transform .5s var(--ease), filter .3s;
+        }
+
+        #galeria-container .foto-item:hover img {
+            transform: scale(1.04);
+            filter: sepia(0) saturate(1);
+        }
+
+        #galeria-container .foto-item .foto-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(26, 60, 46, .8) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity .3s;
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+
+        #galeria-container .foto-item:hover .foto-overlay {
+            opacity: 1;
+        }
+
+        .foto-tag {
+            font-size: .65rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--gold-lt);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--green);
+            padding: 4rem 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .footer-brand img {
+            height: 44px;
+            opacity: .85;
+        }
+
+        .footer-brand p {
+            font-size: .72rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .4);
+            margin-top: .6rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: .72rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            text-decoration: none;
+            transition: color .25s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-lt);
+        }
+
+        .footer-logo img {
+            height: 38px;
+            opacity: .6;
+            transition: opacity .25s;
+        }
+
+        .footer-logo:hover img {
+            opacity: 1;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .page-hero {
+                padding: 0 2rem 3rem;
+            }
+
+            .page-hero::before {
+                display: none;
+            }
+
+            .filtros-bar {
+                padding: 2rem;
+            }
+
+            #galeria-wrapper {
+                padding: 2rem;
+            }
+
+            #galeria-container {
+                columns: 2;
+            }
+
+            footer {
+                flex-direction: column;
+                padding: 3rem 2rem;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 520px) {
+            #galeria-container {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header" id="siteHeader">
+        <a href="../index.html" class="nav-logo">
+            <img src="../imagens/logoprojeto.png" alt="IFC Concórdia">
+            <span>IFC Concórdia</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="../index.html">Início</a></li>
             <li><a href="./linhadoTempo.html">História</a></li>
-            <li><a href="./galeria.html">Galeria</a></li>
+            <li><a href="./galeria.html" class="active">Galeria</a></li>
             <li><a href="./textosdeMemorias.html">Memórias</a></li>
             <li><a href="./entrevistas.html">Entrevistas</a></li>
         </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </header>
+
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="../index.html">Início</a>
+        <a href="./linhadoTempo.html">História</a>
+        <a href="./galeria.html">Galeria</a>
+        <a href="./textosdeMemorias.html">Memórias</a>
+        <a href="./entrevistas.html">Entrevistas</a>
     </nav>
 
-    <p class="subheading reveal" style="text-align: center; margin-top: 140px;">Acervo Digital</p>
-    <h1 class="reveal">Galeria de Memórias</h1>
-    
-    <div id="filtros-container" class="filtros reveal">
+    <section class="page-hero">
+        <img class="page-hero-bg" src="../imagens/depenandoGalinha1969 (1).jpg" alt="">
+        <div class="hero-content">
+            <span class="eyebrow">Acervo Digital</span>
+            <h1>Galeria de<br><em>Memórias</em></h1>
+        </div>
+    </section>
+
+    <div class="filtros-bar" id="filtros-container">
         <span class="filtros-label">Filtrar por:</span>
         <div class="tags-area">
             <button class="tag" data-tag="Desfiles">Desfiles</button>
@@ -69,15 +502,44 @@
     <footer>
         <div class="footer-brand">
             <img src="../imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
-            <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">IFC Campus Concórdia — 60 Anos</p>
+            <p>IFC Campus Concórdia — 60 Anos de História</p>
         </div>
-        <div class="links">
-            <a href="./entrevistas.html">Vozes</a>
-            <a href="./galeria.html">Galeria</a>
-            <a href="./textosdeMemorias.html">Memórias</a>
-            <a href="./linhadoTempo.html">História</a>
-        </div>
-        <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="Logo IFC"></a>
+        <ul class="footer-links">
+            <li><a href="./entrevistas.html">Vozes</a></li>
+            <li><a href="./galeria.html">Galeria</a></li>
+            <li><a href="./textosdeMemorias.html">Memórias</a></li>
+            <li><a href="./linhadoTempo.html">História</a></li>
+        </ul>
+        <a href="https://concordia.ifc.edu.br/" class="footer-logo" target="_blank">
+            <img src="../imagens/logo if.png" alt="Logo IFC">
+        </a>
     </footer>
+
+    <script>
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60));
+        document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+        document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open')));
+
+        // Tag filter active state
+        document.querySelectorAll('.tag').forEach(tag => {
+            tag.addEventListener('click', function () {
+                document.querySelectorAll('.tag').forEach(t => t.classList.remove('ativo'));
+                this.classList.toggle('ativo');
+            });
+        });
+
+        // Observe dynamically added gallery items
+        const galleryObs = new MutationObserver(() => {
+            document.querySelectorAll('.foto-item:not([data-observed])').forEach(el => {
+                el.setAttribute('data-observed', '1');
+                itemObs.observe(el);
+            });
+        });
+        const itemObs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.08 });
+        const container = document.getElementById('galeria-container');
+        if (container) galleryObs.observe(container, { childList: true });
+    </script>
 </body>
+
 </html>

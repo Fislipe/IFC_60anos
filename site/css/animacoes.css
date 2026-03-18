@@ -240,15 +240,15 @@ body {
     .hamburger { display: flex; }
 }
 
-/* ── SCROLL REVEAL (MODERNIZED) ────────────────────────────────── */
+/* ── SCROLL REVEAL ────────────────────────────────────────────── */
 .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-    visibility: hidden;
+    transform: translateY(20px);
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+    visibility: hidden; /* Prevent flickering before animation */
 }
 
-.reveal.visible {
+.reveal.active {
     opacity: 1;
     transform: translateY(0);
     visibility: visible;
