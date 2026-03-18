@@ -121,25 +121,5 @@ new Imagens(
     'Primeira turma a se formar no IFC Concórdia',
     ["Alunos", "Evento"]
 );
-new Imagens(
-    'refeitório.jpg',
-    1969,
-    'Refeitório do IFC',
-    ["Infraestrutura"]
-);
-
-new Imagens(
-    'inauguraçãoCampo.jpg',
-    1969,
-    'Inauguração do Campo do IFC Concórdia',
-    ["Infraestrutura", "Evento"]
-);
-
-new Imagens(
-    'formaturaPrimeiraTurma (1).jpg',
-    1969,
-    'Primeira turma a se formar no IFC Concórdia',
-    ["Alunos", "Evento"]
-);
 
 carregarGaleria();
