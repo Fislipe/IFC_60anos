@@ -1,160 +1,192 @@
-.montserrat-text {
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-style: normal;
-}
+/* ============================================================
+   LINHADOTEMPO.CSS — Vertical Storytelling (2025 Edition)
+   IFC 60 Anos — Premium Identity
+   ============================================================ */
 
-.montaga-regular {
-  font-family: "Montaga", serif;
-  font-weight: 400;
-  font-style: normal;
-}
+@import url('animacoes.css');
 
 .secHistoria {
-    padding: 60px 0;
-    background: #f8ecc5;
-    margin-bottom: 10vh;
+    padding: var(--s-xl) 0;
+    background: var(--bg-main);
+    text-align: center;
 }
 
 .secHistoria h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    margin-top: 70px;
-    font-size: 60px;
-    color: #AC0000;
+    font-family: "Montaga", serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: var(--brand-green);
+    margin-top: 100px;
+    margin-bottom: 5rem;
+    position: relative;
+    display: inline-block;
 }
 
-/* CONTAINER GERAL */
+/* ── TIMELINE CONTAINER ───────────────────────────────────────── */
+
 .timeline-container {
-  position: relative;
-  width: 90%;
-  max-width: 75vw;
-  margin: 60px auto;
-  padding: 0 0 10vh 0;
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem 0;
 }
 
-/* LINHA CENTRAL */
+/* Narrow & Subtle Line */
 .timeline-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 3px;
-  background: #111;
-  transform: translateX(-50%);
-  z-index: 1;
-  margin-bottom: 15vh;
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: linear-gradient(
+        to bottom,
+        transparent 0%,
+        #e0e0e0 10%,
+        #e0e0e0 90%,
+        transparent 100%
+    );
+    transform: translateX(-50%);
 }
 
-/* ITEM */
 .timeline-item {
-  width: 100%;
-  display: flex;
-  flex-direction: row; /* texto esquerda, imagem direita */
-  justify-content: space-between;
-  align-items: center;
-  margin: 50px 0 70px 0;
-  position: relative;
-  z-index: 2;
-  gap: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 12rem;
+    position: relative;
 }
 
-/* ITEM INVERTIDO */
 .timeline-item.invert {
-  flex-direction: row-reverse; /* troca completamente os lados */
+    flex-direction: row-reverse;
 }
 
-/* Áreas laterais */
 .timeline-content {
-  width: 45%;
+    width: 42%;
+    position: relative;
 }
 
-/* TEXTO */
-.text-area h2 {
-  margin: 0 0 10px;
-  font-family: "Montaga", serif;
-  font-weight: 400;
-  color: #1f4e2b;
-  margin-bottom: 20px;
-}
-.text-area p {
-  margin: 0;
-  line-height: 1.5;
+/* ── TEXT AREA (EDITORIAL STYLE) ─────────────────────────────── */
+
+.text-area {
+    text-align: right;
 }
 
-.timeline-item .text-area {
-  text-align: right;
-  align-items: flex-end;
-  display: flex;
-  flex-direction: column;
+.timeline-item.invert .text-area {
+    text-align: left;
 }
 
 .ano-timeline {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Montaga", serif;
+    font-size: 4rem;
+    color: rgba(28, 91, 39, 0.1); /* Subtle large background year */
+    position: absolute;
+    top: -50px;
+    right: 0;
+    line-height: 1;
+    font-weight: 700;
 }
 
-/* Texto do item invertido → alinhado à esquerda */
-.timeline-item.invert .text-area {
-  text-align: left;
-  align-items: flex-start;
+.timeline-item.invert .ano-timeline {
+    left: 0;
+    right: auto;
 }
-/* IMAGENS */
+
+.text-area h2:not(.ano-timeline) {
+    font-family: "Montaga", serif;
+    font-size: 1.8rem;
+    color: var(--brand-green);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 2;
+}
+
+.text-area p {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.8;
+}
+
+/* ── IMAGE AREA (MINIMALIST) ─────────────────────────────────── */
+
 .img-wrapper {
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    overflow: hidden;
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-soft);
+    background: #eee;
+    transition: transform 0.6s var(--ease-out);
+}
+
+.img-wrapper:hover {
+    transform: scale(1.02) translateY(-5px);
+    box-shadow: var(--shadow-premium);
 }
 
 .img-wrapper img {
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-}
-
-/* Legenda */
-.img-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  padding: 10px 14px;
-  background: rgba(0,0,0,0.55);
-  color: #fff;
-  font-size: 14px;
-}
-
-/* MARCADOR */
-.timeline-marker {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20px;
-  height: 20px;
-  background: #000;
-  border-radius: 50%;
-  z-index: 3;
-}
-
-/* RESPONSIVO */
-@media (max-width: 900px) {
-  .timeline-item,
-  .timeline-item.invert {
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .timeline-content {
     width: 100%;
-  }
+    height: 320px;
+    object-fit: cover;
+    display: block;
+}
 
-  .timeline-marker {
-    top: -20px;
-  }
+.img-caption {
+    display: block;
+    padding: 1rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #999;
+}
 
-  .img-wrapper img {
-    height: 200px;
-  }
+/* ── MARKER ──────────────────────────────────────────────────── */
+
+.timeline-marker {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    background: white;
+    border: 2px solid var(--brand-green);
+    border-radius: 50%;
+    z-index: 10;
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
+
+@media (max-width: 800px) {
+    .timeline-container::before {
+        left: 20px;
+    }
+    
+    .timeline-item, .timeline-item.invert {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 60px;
+        margin-bottom: 6rem;
+    }
+    
+    .timeline-content {
+        width: 100%;
+    }
+    
+    .text-area {
+        text-align: left !important;
+        margin-bottom: 2rem;
+    }
+    
+    .ano-timeline {
+        position: relative;
+        top: 0;
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--brand-green);
+        opacity: 0.3;
+    }
+    
+    .timeline-marker {
+        left: 20px;
+        top: 40px;
+    }
 }

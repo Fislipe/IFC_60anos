@@ -8,194 +8,161 @@
     <link href="../css/linhadoTempo.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Linha do Tempo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="../js/animacoes.js" defer></script>
+    <title>História — IFC 60 Anos</title>
 </head>
 <body>
     <header class="site-header">
         <nav class="navbar">
             <ul class="nav-left">
-            <li><a href="../../index.html">Página Inicial</a></li>
-            <li><a href="./linhadoTempo.html">História</a></li>
-            <li><a href="./galeria.html">Galeria</a></li>
+                <li><a href="../../index.html">Página Inicial</a></li>
+                <li><a href="./linhadoTempo.html" class="active">História</a></li>
+                <li><a href="./galeria.html">Galeria</a></li>
             </ul>
 
             <div class="logo-wrap">
-            <a href="../../index.html" class="logo-link">
-                <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
-            </a>
+                <a href="../../index.html" class="logo-link">
+                    <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
+                </a>
             </div>
 
             <ul class="nav-right">
-            <li><a href="./textosdeMemorias.html">Textos de memórias</a></li>
-            <li><a href="./entrevistas.html">Entrevistas</a></li>
-
+                <li><a href="./textosdeMemorias.html">Memórias</a></li>
+                <li><a href="./entrevistas.html">Entrevistas</a></li>
             </ul>
+
+            <button class="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </nav>
     </header>
 
+    <nav class="mobile-menu">
+        <ul>
+            <li><a href="../../index.html">Página Inicial</a></li>
+            <li><a href="./linhadoTempo.html">História</a></li>
+            <li><a href="./galeria.html">Galeria</a></li>
+            <li><a href="./textosdeMemorias.html">Memórias</a></li>
+            <li><a href="./entrevistas.html">Entrevistas</a></li>
+        </ul>
+    </nav>
+
     <section class="secHistoria">
-    <h1>História do campus</h1>
+        <p class="subheading reveal">Nossa Jornada</p>
+        <h1 class="reveal">História do Campus</h1>
 
-    <div class="timeline-container">
+        <div class="timeline-container">
+            <!-- 1961 -->
+            <div class="timeline-item reveal">
+                <div class="timeline-content text-area">
+                    <h2 class="ano-timeline">1961</h2>
+                    <h2>Visita de Jânio Quadros</h2>
+                    <p>Durante visita de Jânio Quadros a Concórdia, o senador Attilio Fontana sugere a criação de uma escola agrícola na região, plantando a semente do que viria a ser o campus.</p>
+                </div>
+                <div class="timeline-marker"></div>
+                <div class="timeline-content img-area">
+                    <div class="img-wrapper">
+                        <img src="../imagens/depenandoGalinha1969 (1).jpg" alt="Visita histórica">
+                        <span class="img-caption">Semente do conhecimento</span>
+                    </div>
+                </div>
+            </div>
 
-        <!-- ITEM Normal 1 -->
-        <div class="timeline-item">
-        <div class="timeline-content text-area">
-            <h2 class="ano-timeline">1961</h2>
-            <h2>Visita de Jânio Quadros</h2>
-            <p>Durante visita de Jânio Quadros a Concórdia, o senador Attilio Fontana sugere a criação de uma escola agrícola na região.</p>
-        </div>
+            <!-- 1965 -->
+            <div class="timeline-item invert reveal">
+                <div class="timeline-content text-area">
+                    <h2 class="ano-timeline">1965</h2>
+                    <h2>Fundação do Campus</h2>
+                    <p>A fundação oficial sob influência do empresário Attilio Fontana, marcando o início das atividades educacionais voltadas ao setor agrícola no oeste catarinense.</p>
+                </div>
+                <div class="timeline-marker"></div>
+                <div class="timeline-content img-area">
+                    <div class="img-wrapper">
+                        <img src="../imagens/formaturaPrimeiraTurma (1).jpg" alt="Fundação">
+                        <span class="img-caption">Primeiros passos</span>
+                    </div>
+                </div>
+            </div>
 
-        <div class="timeline-marker"></div>
+            <!-- 1968 -->
+            <div class="timeline-item reveal">
+                <div class="timeline-content text-area">
+                    <h2 class="ano-timeline">1968</h2>
+                    <h2>Primeira Formatura</h2>
+                    <p>Formatura da 1ª turma do Ginásio Agrícola. Na época, os alunos se formavam como mestres agrícolas, prontos para transformar a agricultura regional.</p>
+                </div>
+                <div class="timeline-marker"></div>
+                <div class="timeline-content img-area">
+                    <div class="img-wrapper">
+                        <img src="../imagens/refeitório.jpg" alt="Formatura 1968">
+                        <span class="img-caption">Mestres Agrícolas</span>
+                    </div>
+                </div>
+            </div>
 
-        <div class="timeline-content img-area">
-            <div class="img-wrapper">
-            <img src="caminho/para/imagem_1961.jpg" alt="">
-            <span class="img-caption">Foto da visita de Jânio Quadros</span>
+            <!-- 1972 -->
+            <div class="timeline-item invert reveal">
+                <div class="timeline-content text-area">
+                    <h2 class="ano-timeline">1972</h2>
+                    <h2>Colégio Agrícola</h2>
+                    <p>Elevação de categoria para Colégio Agrícola através do Decreto nº 70.513, ampliando a oferta educacional e a importância da instituição.</p>
+                </div>
+                <div class="timeline-marker"></div>
+                <div class="timeline-content img-area">
+                    <div class="img-wrapper">
+                        <img src="../imagens/inauguraçãoCampo.jpg" alt="Colégio Agrícola">
+                        <span class="img-caption">Expansão e Reconhecimento</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 1979 -->
+            <div class="timeline-item reveal">
+                <div class="timeline-content text-area">
+                    <h2 class="ano-timeline">1979</h2>
+                    <h2>Escola Agrotécnica Federal</h2>
+                    <p>A instituição passa a denominar-se Escola Agrotécnica Federal, consolidando seu papel como referência nacional em ensino técnico agrícola.</p>
+                </div>
+                <div class="timeline-marker"></div>
+                <div class="timeline-content img-area">
+                    <div class="img-wrapper">
+                        <img src="../imagens/EAgrotecnica.jpg" alt="EAF Concórdia">
+                        <span class="img-caption">Referência Federal</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2008 -->
+            <div class="timeline-item invert reveal">
+                <div class="timeline-content text-area">
+                    <h2 class="ano-timeline">2008</h2>
+                    <h2>O Surgimento do IFC</h2>
+                    <p>Criação dos Institutos Federais. A unidade passa a integrar o Instituto Federal Catarinense (IFC), unindo tradição histórica a um novo modelo de educação superior e técnica.</p>
+                </div>
+                <div class="timeline-marker"></div>
+                <div class="timeline-content img-area">
+                    <div class="img-wrapper">
+                        <img src="../imagens/logoprojeto.png" alt="IFC">
+                        <span class="img-caption">Uma nova era</span>
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
-
-        <!-- ITEM INVERTIDO 2 -->
-        <div class="timeline-item invert">
-        <div class="timeline-content text-area">
-            <h2 class="ano-timeline">1965</h2>
-            <h2>Fundação do campus</h2>
-            <p>Fundação do campus ocorreu em 1965 com influência do então empresário Attilio Fontana.</p>
-        </div>
-
-        <div class="timeline-marker"></div>
-
-        <div class="timeline-content img-area">
-            <div class="img-wrapper">
-            <img src="caminho/para/imagem_1965.jpg" alt="">
-            <span class="img-caption">Formatura da primeira turma</span>
-            </div>
-        </div>
-        </div>
-
-        <!-- Item normal 3 -->
-        <div class="timeline-item">
-        <div class="timeline-content text-area">
-            <h2 class="ano-timeline">1968</h2>
-            <h2>Formatura da 1ª turma do Ginásio Agrícola</h2>
-            <p>Na época, se formavam como mestres agrícolas</p>
-        </div>
-
-        <div class="timeline-marker"></div>
-
-        <div class="timeline-content img-area">
-            <div class="img-wrapper">
-            <img src="../imagens/formaturaPrimeiraTurma (1).jpg" alt="">
-            <span class="img-caption">Foto da visita de Jânio Quadros</span>
-            </div>
-        </div>
-        </div>
-
-        <!-- ITEM INVERTIDO  4-->
-        <div class="timeline-item invert">
-        <div class="timeline-content text-area">
-            <h2 class="ano-timeline">1972</h2>
-            <h2>Torna-se Colégio Agrícola</h2>
-            <p>Elevação de categoria para Colégio Agrícola, pelo Decreto nº 70.513.</p>
-        </div>
-
-        <div class="timeline-marker"></div>
-
-        <div class="timeline-content img-area">
-            <div class="img-wrapper">
-            <img src="caminho/para/imagem_1965.jpg" alt="">
-            <span class="img-caption">Formatura da primeira turma</span>
-            </div>
-        </div>
-        </div>
-
-        <!-- Intem normal 5 -->
-        <div class="timeline-item">
-        <div class="timeline-content text-area">
-            <h2 class="ano-timeline">1979</h2>
-            <h2>Agora denomina-se Escola Agrotécnica Federal</h2>
-            <p>Dentre as mudanças, estão:</p>
-        </div>
-
-        <div class="timeline-marker"></div>
-
-        <div class="timeline-content img-area">
-            <div class="img-wrapper">
-            <img src="../imagens/formaturaPrimeiraTurma (1).jpg" alt="">
-            <span class="img-caption">Foto da visita de Jânio Quadros</span>
-            </div>
-        </div>
-        </div>
-
-        <!-- ITEM INVERTIDO 6-->
-        <div class="timeline-item invert">
-        <div class="timeline-content text-area">
-            <h2 class="ano-timeline">1993 </h2>
-            <h2>Torna-se Autarquia Federal</h2>
-            <p>Significa?</p>
-        </div>
-
-        <div class="timeline-marker"></div>
-
-        <div class="timeline-content img-area">
-            <div class="img-wrapper">
-            <img src="caminho/para/imagem_1965.jpg" alt="">
-            <span class="img-caption">Formatura da primeira turma</span>
-            </div>
-        </div>
-        </div>
-
-        <!-- Intem normal 7 -->
-        <div class="timeline-item">
-        <div class="timeline-content text-area">
-            <h2 class="ano-timeline">2005</h2>
-            <h2>Começa o Curso Técnico em Alimentos</h2>
-            <p>Descrição</p>
-        </div>
-
-        <div class="timeline-marker"></div>
-
-        <div class="timeline-content img-area">
-            <div class="img-wrapper">
-            <img src="../imagens/formaturaPrimeiraTurma (1).jpg" alt="">
-            <span class="img-caption">Foto da visita de Jânio Quadros</span>
-            </div>
-        </div>
-        </div>
-
-        <!-- ITEM INVERTIDO 8-->
-        <div class="timeline-item invert">
-        <div class="timeline-content text-area">
-            <h2 class="ano-timeline">2008 </h2>
-            <h2>Passa a integrar o Instituto Federal Catarinente (IFC)</h2>
-            <p>Descrição</p>
-        </div>
-
-        <div class="timeline-marker"></div>
-
-        <div class="timeline-content img-area">
-            <div class="img-wrapper">
-            <img src="caminho/para/imagem_1965.jpg" alt="">
-            <span class="img-caption">Formatura da primeira turma</span>
-            </div>
-        </div>
-        </div>
-
-
-    </div>
     </section>
 
-    <footer style="margin-top: 140%;">
-        <img src="../imagens/logoprojeto.png" alt="logoprojeto">
-        <div class="links">
-            <a href="../entrevistas.html">Entrevistas</a>
-            <a href="../galeria.html">Galeria</a>
-            <a href="../textosdeMemorias.html">Textos de memórias</a>
-            <a href="../linhadoTempo.html">Linha do tempo</a>
-            <a href="mailto:ifcmemorias60@gmail.com">Nosso email</a>
+    <footer>
+        <div class="footer-brand">
+            <img src="../imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
+            <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">IFC Campus Concórdia — 60 Anos</p>
         </div>
-        <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="logo if"></a>
+        <div class="links">
+            <a href="./entrevistas.html">Vozes</a>
+            <a href="./galeria.html">Galeria</a>
+            <a href="./textosdeMemorias.html">Memórias</a>
+            <a href="./linhadoTempo.html">História</a>
+        </div>
+        <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="Logo IFC"></a>
     </footer>
 </body>
+</html>

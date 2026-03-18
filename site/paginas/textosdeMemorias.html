@@ -8,113 +8,86 @@
     <link href="../css/textosdeMemorias.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Textos de Memórias</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="../js/animacoes.js" defer></script>
+    <title>Memórias — IFC 60 Anos</title>
 </head>
 <body>
     <header class="site-header">
         <nav class="navbar">
             <ul class="nav-left">
+                <li><a href="../../index.html">Página Inicial</a></li>
+                <li><a href="./linhadoTempo.html">História</a></li>
+                <li><a href="./galeria.html">Galeria</a></li>
+            </ul>
+            <div class="logo-wrap">
+                <a href="../../index.html" class="logo-link">
+                    <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-right">
+                <li><a href="./textosdeMemorias.html" class="active">Memórias</a></li>
+                <li><a href="./entrevistas.html">Entrevistas</a></li>
+            </ul>
+            <button class="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <nav class="mobile-menu">
+        <ul>
             <li><a href="../../index.html">Página Inicial</a></li>
             <li><a href="./linhadoTempo.html">História</a></li>
             <li><a href="./galeria.html">Galeria</a></li>
-            </ul>
-
-            <div class="logo-wrap">
-            <a href="../../index.html" class="logo-link">
-                <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
-            </a>
-            </div>
-
-            <ul class="nav-right">
-            <li><a href="./textosdeMemorias.html">Textos de memórias</a></li>
+            <li><a href="./textosdeMemorias.html">Memórias</a></li>
             <li><a href="./entrevistas.html">Entrevistas</a></li>
-
-            </ul>
-        </nav>
-    </header> 
+        </ul>
+    </nav>
 
     <div class="secTextosdeMemorias">
-        <h1 class="h1Verde">Textos de memórias</h1>
-        <p>Confira as memórias de quem já viveu no campus por quem vive nele agora</p>
+        <p class="subheading reveal">Relatos e Vivências</p>
+        <h1 class="reveal">Textos de Memórias</h1>
+        <p class="reveal">Uma coleção de perspectivas sobre o cotidiano, os desafios e as conquistas que moldaram o campus.</p>
+        
         <div class="container-memorias">
-            <div class="box-memoria">
-                <h1>Título do texto</h1>
-                <p>De:</p>
-                <p>Sobre:</p>
-                <button class="botao-textomemoria"><a href="./textosdeMemorias/texto1.html">Acessar</a></button>
+            <!-- Cards decorativos -->
+            <div class="box-memoria reveal delay-1">
+                <p class="subheading" style="color: var(--brand-green); margin-bottom: 0.5rem;">Cotidiano</p>
+                <h1>O despertar da EAgro nos anos 80</h1>
+                <p>Por: João Silva</p>
+                <p>Sobre: Vivências estudantis</p>
+                <a href="./textosdeMemorias/texto1.html" class="botao-textomemoria" style="text-decoration: none;">Ler Memória</a>
             </div>
-            <div class="box-memoria">
-                <h1>Título do texto</h1>
-                <p>De:</p>
-                <p>Sobre:</p>
-                <button class="botao-textomemoria"><a href="./textosdeMemorias/texto2.html">Acessar</a></button>
+            <div class="box-memoria reveal delay-2">
+                <p class="subheading" style="color: var(--brand-green); margin-bottom: 0.5rem;">Legado</p>
+                <h1>Dos Mestres Agrícolas ao IFC</h1>
+                <p>Por: Maria Oliveira</p>
+                <p>Sobre: Evolução institucional</p>
+                <a href="./textosdeMemorias/texto2.html" class="botao-textomemoria" style="text-decoration: none;">Ler Memória</a>
             </div>
-            <div class="box-memoria">
-                <h1>Título do texto</h1>
-                <p>De:</p>
-                <p>Sobre:</p>
-                <button class="botao-textomemoria"><a href="./textosdeMemorias/texto3.html">Acessar</a></button>
-            </div>
-            <div class="box-memoria">
-                <h1>Título do texto</h1>
-                <p>De:</p>
-                <p>Sobre:</p>
-                <button class="botao-textomemoria"><a href="./textosdeMemorias/texto4.html">Acessar</a></button>
-            </div>
-            <div class="box-memoria">
-                <h1>Título do texto</h1>
-                <p>De:</p>
-                <p>Sobre:</p>
-                <button class="botao-textomemoria"><a>Acessar</a></button>
-            </div>
-            <div class="box-memoria">
-                <h1>Título do texto</h1>
-                <p>De:</p>
-                <p>Sobre:</p>
-                <button class="botao-textomemoria"><a>Acessar</a></button>
-            </div>
-            <div class="box-memoria">
-                <h1>Título do texto</h1>
-                <p>De:</p>
-                <p>Sobre:</p>
-                <button class="botao-textomemoria"><a>Acessar</a></button>
-            </div>
-            <div class="box-memoria">
-                <h1>Título do texto</h1>
-                <p>De:</p>
-                <p>Sobre:</p>
-                <button class="botao-textomemoria"><a>Acessar</a></button>
-            </div>
-            <div class="box-memoria">
-                <h1>Título do texto</h1>
-                <p>De:</p>
-                <p>Sobre:</p>
-                <button class="botao-textomemoria"><a>Acessar</a></button>
-            </div>
-            <div class="box-memoria">
-                <h1>Título do texto</h1>
-                <p>De:</p>
-                <p>Sobre:</p>
-                <button class="botao-textomemoria"><a>Acessar</a></button>
-            </div>
-            <div class="box-memoria">
-                <h1>Título do texto</h1>
-                <p>De:</p>
-                <p>Sobre:</p>
-                <button class="botao-textomemoria"><a>Acessar</a></button>
+            <div class="box-memoria reveal delay-3">
+                <p class="subheading" style="color: var(--brand-green); margin-bottom: 0.5rem;">Trabalho</p>
+                <h1>A Ciência no Campo: 60 anos</h1>
+                <p>Por: Prof. Carlos</p>
+                <p>Sobre: Desenvolvimento técnico</p>
+                <a href="./textosdeMemorias/texto3.html" class="botao-textomemoria" style="text-decoration: none;">Ler Memória</a>
             </div>
         </div>
     </div>
+
     <footer>
-        <img src="../imagens/logoprojeto.png" alt="logoprojeto">
-        <div class="links">
-            <a href="../entrevistas.html">Entrevistas</a>
-            <a href="../galeria.html">Galeria</a>
-            <a href="../textosdeMemorias.html">Textos de memórias</a>
-            <a href="../linhadoTempo.html">Linha do tempo</a>
-            <a href="mailto:ifcmemorias60@gmail.com">Nosso email</a>
+        <div class="footer-brand">
+            <img src="../imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
+            <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">IFC Campus Concórdia — 60 Anos</p>
         </div>
-        <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="logo if"></a>
+        <div class="links">
+            <a href="./entrevistas.html">Vozes</a>
+            <a href="./galeria.html">Galeria</a>
+            <a href="./textosdeMemorias.html">Memórias</a>
+            <a href="./linhadoTempo.html">História</a>
+        </div>
+        <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="Logo IFC"></a>
     </footer>
 </body>
+</html>

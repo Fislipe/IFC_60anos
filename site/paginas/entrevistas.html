@@ -8,105 +8,96 @@
     <link href="../css/entrevistas.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>Entrevistas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="../js/animacoes.js" defer></script>
+    <title>Vozes — IFC 60 Anos</title>
 </head>
 <body>
     <header class="site-header">
         <nav class="navbar">
             <ul class="nav-left">
-            <li><a href="../../index.html">Página Inicial</a></li>
-            <li><a href="./linhadoTempo.html">História</a></li>
-            <li><a href="./galeria.html">Galeria</a></li>
+                <li><a href="../../index.html">Página Inicial</a></li>
+                <li><a href="./linhadoTempo.html">História</a></li>
+                <li><a href="./galeria.html">Galeria</a></li>
             </ul>
-
             <div class="logo-wrap">
-            <a href="../../index.html" class="logo-link">
-                <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
-            </a>
+                <a href="../../index.html" class="logo-link">
+                    <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
+                </a>
             </div>
-
             <ul class="nav-right">
-            <li><a href="./textosdeMemorias.html">Textos de memórias</a></li>
-            <li><a href="./entrevistas.html">Entrevistas</a></li>
-
+                <li><a href="./textosdeMemorias.html">Memórias</a></li>
+                <li><a href="./entrevistas.html" class="active">Entrevistas</a></li>
             </ul>
+            <button class="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
         </nav>
     </header>
 
+    <nav class="mobile-menu">
+        <ul>
+            <li><a href="../../index.html">Página Inicial</a></li>
+            <li><a href="./linhadoTempo.html">História</a></li>
+            <li><a href="./galeria.html">Galeria</a></li>
+            <li><a href="./textosdeMemorias.html">Memórias</a></li>
+            <li><a href="./entrevistas.html">Entrevistas</a></li>
+        </ul>
+    </nav>
+
     <div class="Entrevistas">
-        <h1>Entrevistas</h1>
-        <p>Veja as entrevistas feitas com ex-servidores e ex-alunos e conheça de perto o campus.</p>
-    <div class="entrevista-container">
-
-    <!-- ENTREVISTA NORMAL -->
-    <div class="entrevista-item">
-        <!-- ESQUERDA — Texto (nome + biografia) -->
-        <div class="entrevista-content text-area">
-            <h2 class="entrevista-titulo">Entrevista com [nome]</h2>
-            <p class="mini-bio">Mini biografia da(s) pessoa(s)</p>
-        </div>
-
-        <div class="entrevista-marker"></div>
-
-        <!-- DIREITA — Vídeo/Imagem + áudio + transcrição -->
-        <div class="entrevista-content midia-area">
-
-            <!-- VÍDEO DO YOUTUBE ou IMAGEM -->
-            <div class="midia-wrapper">
-                <!-- Se tiver vídeo -->
-                <!-- <iframe src="https://www.youtube.com/embed/ID_DO_VIDEO" allowfullscreen></iframe> -->
-
-                <!-- Se for apenas imagem -->
-                <img src="../imagens/inauguraçãoCampo.jpg" alt="Miniatura da entrevista">
+        <p class="subheading reveal">Relatos Orais</p>
+        <h1 class="reveal">Vozes do Campus</h1>
+        <p class="reveal">Testemunhos emocionantes de quem ajudou a construir a história de seis décadas do IFC Campus Concórdia.</p>
+        
+        <div class="entrevista-container">
+            <!-- Entrevista 1 -->
+            <div class="entrevista-item reveal">
+                <div class="entrevista-content text-area">
+                    <h2 class="entrevista-titulo">Memórias do Início</h2>
+                    <p class="mini-bio">Entrevista com os primeiros servidores da Escola Agrotécnica, relatando os desafios da década de 60.</p>
+                </div>
+                <div class="entrevista-marker"></div>
+                <div class="entrevista-content midia-area">
+                    <div class="midia-wrapper">
+                        <img src="../imagens/inauguraçãoCampo.jpg" alt="Entrevista Histórica">
+                    </div>
+                    <audio controls class="audio-player">
+                        <source src="#" type="audio/mpeg">
+                    </audio>
+                    <a href="./transcrições/transcricao1.html" class="btn-transcricao">Ler Transcrição</a>
+                </div>
             </div>
 
-            <!-- ÁUDIO -->
-            <audio controls class="audio-player">
-                <source src="caminho/para/audio.mp3" type="audio/mpeg">
-            </audio>
-
-            <!-- LINK TRANSCRIÇÃO -->
-            <a href="./transcrições/transcricao1.html" class="btn-transcricao">Acessar transcrição da entrevista</a>
-
+            <!-- Entrevista 2 (Invertida) -->
+            <div class="entrevista-item invert reveal">
+                <div class="entrevista-content text-area">
+                    <h2 class="entrevista-titulo">Evolução e Tecnologia</h2>
+                    <p class="mini-bio">Depoimentos sobre a transição para o Instituto Federal e a modernização dos laboratórios e campos experimentais.</p>
+                </div>
+                <div class="entrevista-marker"></div>
+                <div class="entrevista-content midia-area">
+                    <div class="midia-wrapper">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                    </div>
+                    <a href="#" class="btn-transcricao">Transcrição em Breve</a>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- ENTREVISTA INVERTIDA -->
-    <div class="entrevista-item invert">
-
-        <div class="entrevista-content text-area">
-            <h2 class="entrevista-titulo">Entrevista com [nome]</h2>
-            <p class="mini-bio">Mini biografia da(s) pessoa(s)</p>
-        </div>
-
-        <div class="entrevista-marker"></div>
-
-        <div class="entrevista-content midia-area">
-            <div class="midia-wrapper">
-                <iframe src="https://www.youtube.com/embed/ID_DO_VIDEO" allowfullscreen></iframe>
-            </div>
-
-            <audio controls class="audio-player">
-                <source src="caminho/para/audio2.mp3" type="audio/mpeg">
-            </audio>
-
-            <a href="transcricao2.html" class="btn-transcricao">Acessar transcrição da entrevista</a>
-        </div>
-
-    </div>
-
-</div>
-</div>
     <footer>
-        <img src="../imagens/logoprojeto.png" alt="logoprojeto">
-        <div class="links">
-            <a href="../entrevistas.html">Entrevistas</a>
-            <a href="../galeria.html">Galeria</a>
-            <a href="../textosdeMemorias.html">Textos de memórias</a>
-            <a href="../linhadoTempo.html">Linha do tempo</a>
-            <a href="mailto:ifcmemorias60@gmail.com">Nosso email</a>
+        <div class="footer-brand">
+            <img src="../imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
+            <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">IFC Campus Concórdia — 60 Anos</p>
         </div>
-        <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="logo if"></a>
+        <div class="links">
+            <a href="./entrevistas.html">Vozes</a>
+            <a href="./galeria.html">Galeria</a>
+            <a href="./textosdeMemorias.html">Memórias</a>
+            <a href="./linhadoTempo.html">História</a>
+        </div>
+        <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="Logo IFC"></a>
     </footer>
 </body>
+</html>

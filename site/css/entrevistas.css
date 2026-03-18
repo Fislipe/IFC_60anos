@@ -1,218 +1,194 @@
-/* CONTAINER GERAL */
-.entrevista-container {
-  position: relative;
-  background-color: #11471A;
-  width: 90%;
-  max-width: 75vw;
-  margin: 50px auto;
-  padding-bottom: 10vh;
-}
+/* ============================================================
+   ENTREVISTAS.CSS — Modern Media Player (2025 Edition)
+   IFC 60 Anos — Premium Identity
+   ============================================================ */
+
+@import url('animacoes.css');
 
 body {
-    background-color: #11471A;
+    background-color: var(--bg-main);
 }
 
 .Entrevistas {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding: 110px 0;
-    align-items: center;
-}
-
-h1, p {
+    padding: 160px 4vw 100px;
     text-align: center;
-    color: #FFF;
-    margin-top: 10px;
 }
 
-h1 { font-size: 60px;}
+.Entrevistas h1 {
+    font-family: "Montaga", serif;
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    color: var(--brand-green);
+    margin-bottom: 1.5rem;
+}
 
+.Entrevistas > p {
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto 6rem;
+}
 
-/* LINHA CENTRAL */
+/* ── TIMELINE CONTAINER ───────────────────────────────────────── */
+
+.entrevista-container {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Subtle line */
 .entrevista-container::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 3px;
-  background: #d6d6d6;
-  transform: translateX(-50%);
-  z-index: 1;
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background: #e0e0e0;
+    transform: translateX(-50%);
 }
 
-/* ITEM */
 .entrevista-item {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin: 50px 0 70px 0;
-  position: relative;
-  z-index: 2;
-  gap: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12rem;
+    position: relative;
 }
 
-/* ITEM INVERTIDO */
 .entrevista-item.invert {
-  flex-direction: row-reverse;
+    flex-direction: row-reverse;
 }
 
-/* LADOS */
 .entrevista-content {
-  width: 45%;
+    width: 44%;
 }
 
-/* TEXTO (nome + biografia) */
-.entrevista-titulo {
-  font-family: "Montaga", serif;
-  font-size: 24px;
-  color: #e8e1c8;
-  margin-bottom: 10px;
-}
+/* ── TEXT AREA ────────────────────────────────────────────────── */
 
-.mini-bio {
-  color: #ccc;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-.entrevista-item .text-area {
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+.text-area {
+    text-align: right;
+    padding-top: 1rem;
 }
 
 .entrevista-item.invert .text-area {
-  text-align: left;
-  align-items: flex-start;
+    text-align: left;
 }
 
-/* MÍDIA (vídeo/imagem + áudio) */
+.entrevista-titulo {
+    font-family: "Montaga", serif;
+    font-size: 1.8rem;
+    color: var(--brand-green);
+    margin-bottom: 1rem;
+}
+
+.mini-bio {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+}
+
+/* ── MEDIA WRAPPER ────────────────────────────────────────────── */
+
 .midia-wrapper {
-  width: 100%;
-  height: 260px;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #eee;
-  margin-bottom: 15px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    overflow: hidden;
+    border-radius: var(--r-md);
+    box-shadow: var(--shadow-soft);
+    background: #000;
+    height: 300px;
+    margin-bottom: 2rem;
+    transition: all 0.5s var(--ease-out);
+}
+
+.midia-wrapper:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-premium);
 }
 
 .midia-wrapper iframe,
 .midia-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Áudio */
+/* Custom Audio Skin */
 .audio-player {
-  width: 100%;
-  margin-bottom: 10px;
+    width: 100%;
+    height: 48px;
+    margin-bottom: 2rem;
+    border-radius: var(--r-full);
+    background: var(--bg-secondary);
 }
 
-/* Botão transcrição */
+/* Transcription Button */
 .btn-transcricao {
-  display: inline-block;
-  margin-top: 5px;
-  background: #b49a6a;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 15px;
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    background: transparent;
+    border: 1px solid var(--brand-green);
+    color: var(--brand-green);
+    border-radius: var(--r-full);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: all 0.3s;
 }
 
 .btn-transcricao:hover {
-  background: #9a8359;
+    background: var(--brand-green);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(28, 91, 39, 0.15);
 }
 
-/* MARCADOR */
+/* ── MARKER ──────────────────────────────────────────────────── */
+
 .entrevista-marker {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 14px;
-  height: 14px;
-  background: #e8e1c8;
-  border-radius: 50%;
-  z-index: 3;
+    position: absolute;
+    left: 50%;
+    top: 40px;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: white;
+    border: 2px solid var(--brand-green);
+    border-radius: 50%;
+    z-index: 5;
 }
+
+/* ============================================================
+   TRANSCRIÇÃO PAGE (Same as Memory Reader)
+   ============================================================ */
 
 .transcricao {
-    background-color: #1a3e20;
-    display: flex;
-    flex-direction: column;
-    gap: 2vh;
-    justify-content:flex-start;
-    align-items: center;
-    margin-top: 100px;
-    padding: 20px 0;
-}
-
-.transcricao h1 {
-    font-size: 40px;
-}
-
-.transcricao h1, h2 {
-    color: #FFF;
+    background: #0f110e;
+    padding: 180px 4vw 100px;
+    min-height: 100vh;
+    color: #e0e0e0;
 }
 
 .transcricao-texto {
-    max-width: 70vw;        
-    margin: 0 auto;          
+    max-width: 800px;
+    margin: 3rem auto;
     font-family: "Georgia", serif;
-    font-size: 1.1rem;
-    line-height: 1.8;        
-    color: #e3e3e3;
-    padding: 20px;
+    font-size: 1.15rem;
+    line-height: 1.8;
 }
 
-.transcricao >p {
-    margin-top: -2vh;
-    font-weight: 300;
-}
+/* ── RESPONSIVE ──────────────────────────────────────────────── */
 
-.transcricao-texto p {
-    margin-bottom: 18px;      
-    text-align: justify;       
+@media (max-width: 1024px) {
+    .entrevista-container::before { display: none; }
+    .entrevista-item, .entrevista-item.invert {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 6rem;
+    }
+    .entrevista-content { width: 100%; }
+    .text-area { text-align: center !important; margin-bottom: 2.5rem; }
+    .entrevista-marker { display: none; }
 }
-
-.transcricao-texto p:not(:first-child) {
-    text-indent: 1.5em;
-}
-
-.transcricao img {
-    height: auto;
-    width: 60vw;
-    border-radius: 2px;
-    border: 10px solid #bab5a4e8;
-}
-
-.transcricao-texto h1,
-.transcricao-texto h2,
-.transcricao-texto h3 {
-    margin-top: 30px;
-    margin-bottom: 10px;
-    font-family: "Merriweather", serif;
-    font-weight: bold;
-    color: #1d5e27;            
-}
-
-.transcricao-texto blockquote {
-    margin: 20px 0;
-    padding: 15px 20px;
-    border-left: 4px solid #1d5e27;
-    background: #f6f6f6;
-    font-style: italic;
-}
-
-.transcricao-texto strong {
-    color: #000;
-    font-weight: bold;
-}
-

@@ -147,8 +147,8 @@ Como se trata de uma instituição federal/pública de educação:
 
 Para otimizar o cronograma, o projeto atual (`/site`) será tratado como a nossa **Fonte de Dados Legada (Legacy Data Source)**.
 
-- **Mídias (`/site/imagens`):** Migração direta de arquivos JPEG/PNG para o novo Storage.
-- **Metadados (`/site/dados/galeria.json`):** Base para o script de semente (*seeding*) do banco de dados (anos, décadas, tags).
+- **Mídias (`/imagens`):** Migração direta de arquivos JPEG/PNG para o novo Storage.
+- **Metadados (`/dados/galeria.json`):** Base para o script de semente (*seeding*) do banco de dados (anos, décadas, tags).
 - **Conteúdo Textual:** Transcrições de entrevistas e textos de memória serão convertidos em blocos de *RichText* no CMS.
 - **Identidade Visual:** Reaproveitamento das escalas de cores (hex) e tipografia (fuentes) no Tailwind v4.
 

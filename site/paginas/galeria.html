@@ -8,39 +8,49 @@
     <link href="../css/galeria.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="../js/galeriaBruno.js" defer></script>
-
-    <title>Galeria</title>
+    <script src="../js/animacoes.js" defer></script>
+    <title>Galeria — IFC 60 Anos</title>
 </head>
 <body>
     <header class="site-header">
         <nav class="navbar">
             <ul class="nav-left">
+                <li><a href="../../index.html">Página Inicial</a></li>
+                <li><a href="./linhadoTempo.html">História</a></li>
+                <li><a href="./galeria.html" class="active">Galeria</a></li>
+            </ul>
+            <div class="logo-wrap">
+                <a href="../../index.html" class="logo-link">
+                    <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
+                </a>
+            </div>
+            <ul class="nav-right">
+                <li><a href="./textosdeMemorias.html">Memórias</a></li>
+                <li><a href="./entrevistas.html">Entrevistas</a></li>
+            </ul>
+            <button class="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </nav>
+    </header>
+
+    <nav class="mobile-menu">
+        <ul>
             <li><a href="../../index.html">Página Inicial</a></li>
             <li><a href="./linhadoTempo.html">História</a></li>
             <li><a href="./galeria.html">Galeria</a></li>
-            </ul>
-
-            <div class="logo-wrap">
-            <a href="../../index.html" class="logo-link">
-                <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
-            </a>
-            </div>
-
-            <ul class="nav-right">
-            <li><a href="./textosdeMemorias.html">Textos de memórias</a></li>
+            <li><a href="./textosdeMemorias.html">Memórias</a></li>
             <li><a href="./entrevistas.html">Entrevistas</a></li>
+        </ul>
+    </nav>
 
-            </ul>
-        </nav>
-    </header>
+    <p class="subheading reveal" style="text-align: center; margin-top: 140px;">Acervo Digital</p>
+    <h1 class="reveal">Galeria de Memórias</h1>
     
-    <h1>Galeria de Memórias</h1>
-    <div id="filtros-container" class="filtros">
-        <span class="filtros-label">Filtrar:</span>
-
+    <div id="filtros-container" class="filtros reveal">
+        <span class="filtros-label">Filtrar por:</span>
         <div class="tags-area">
             <button class="tag" data-tag="Desfiles">Desfiles</button>
             <button class="tag" data-tag="Infraestrutura">Infraestrutura</button>
@@ -48,21 +58,25 @@
             <button class="tag" data-tag="Eventos">Eventos</button>
         </div>
     </div>
+
     <div id="galeria-wrapper">
-        <div id="galeria-container" class="galeria">
+        <div id="galeria-container" class="fotos-grid">
+            <!-- Dinamicamente preenchido pelo galeriaBruno.js -->
         </div>
-        <div class="linha-timeline"></div>
     </div>
-    
+
     <footer>
-        <img src="../imagens/logoprojeto.png" alt="logoprojeto">
-        <div class="links">
-            <a href="../entrevistas.html">Entrevistas</a>
-            <a href="../galeria.html">Galeria</a>
-            <a href="../textosdeMemorias.html">Textos de memórias</a>
-            <a href="../linhadoTempo.html">Linha do tempo</a>
-            <a href="mailto:ifcmemorias60@gmail.com">Nosso email</a>
+        <div class="footer-brand">
+            <img src="../imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
+            <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">IFC Campus Concórdia — 60 Anos</p>
         </div>
-        <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="logo if"></a>
+        <div class="links">
+            <a href="./entrevistas.html">Vozes</a>
+            <a href="./galeria.html">Galeria</a>
+            <a href="./textosdeMemorias.html">Memórias</a>
+            <a href="./linhadoTempo.html">História</a>
+        </div>
+        <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="Logo IFC"></a>
     </footer>
 </body>
+</html>
