@@ -1,169 +1,1035 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portal oficial comemorativo dos 60 anos do IFC Campus Concórdia. Uma jornada pela nossa história, memórias e legado.">
-    
-    <link href="./css/animacoes.css" rel="stylesheet">
-    <link href="./css/estilo.css" rel="stylesheet">
+    <meta name="description"
+        content="Portal oficial comemorativo dos 60 anos do IFC Campus Concórdia. Uma jornada pela nossa história, memórias e legado.">
     <link rel="icon" type="image/png" href="./imagens/logoprojeto.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <script src="./js/carossel.js" defer></script>
-    <script src="./js/animacoes.js" defer></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
     <title>IFC 60 Anos — Legado em Evolução</title>
+    <style>
+        /* ── RESET & TOKENS ── */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream: #f5f0e8;
+            --ink: #0e0e0e;
+            --green: #1a3c2e;
+            --gold: #b8943f;
+            --gold-lt: #d4af6a;
+            --muted: #6b6b5e;
+            --border: rgba(14, 14, 14, .12);
+            --serif: 'Cormorant Garamond', Georgia, serif;
+            --sans: 'DM Sans', sans-serif;
+            --ease: cubic-bezier(.25, .46, .45, .94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--cream);
+            color: var(--ink);
+            font-family: var(--sans);
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* ── GRAIN OVERLAY ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+            opacity: .5;
+        }
+
+        /* ── NAVBAR ── */
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.6rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background .4s var(--ease), padding .4s var(--ease);
+        }
+
+        .site-header.scrolled {
+            background: rgba(245, 240, 232, .92);
+            backdrop-filter: blur(12px);
+            padding: 1rem 3rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 65px;
+            opacity: 1;
+        }
+
+        .nav-logo span {
+            font-family: var(--serif);
+            font-size: 1.05rem;
+            font-weight: 400;
+            color: var(--green);
+            letter-spacing: .02em;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: .78rem;
+            font-weight: 400;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: var(--ink);
+            text-decoration: none;
+            position: relative;
+            opacity: .7;
+            transition: opacity .25s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s var(--ease);
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--ink);
+            transition: all .3s;
+        }
+
+        /* ── MOBILE MENU ── */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 98;
+            background: var(--green);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .mobile-menu.open {
+            display: flex;
+        }
+
+        .mobile-menu a {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: var(--cream);
+            text-decoration: none;
+            letter-spacing: .04em;
+            opacity: .85;
+            transition: opacity .2s;
+        }
+
+        .mobile-menu a:hover {
+            opacity: 1;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            height: 100svh;
+            min-height: 600px;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        .hero-slides {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 1.2s var(--ease);
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.06);
+            transition: transform 8s var(--ease);
+            filter: brightness(.55) saturate(.8);
+        }
+
+        .hero-slide.active img {
+            transform: scale(1);
+        }
+
+        /* vertical gold line */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 3rem;
+            bottom: 15%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            padding: 0 5rem 6rem;
+            max-width: 780px;
+        }
+
+        .hero-eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-eyebrow span {
+            font-size: .7rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold-lt);
+            font-weight: 400;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background: var(--gold);
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 300;
+            line-height: 1;
+            color: #fff;
+            letter-spacing: -.01em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--gold-lt);
+        }
+
+        .hero-desc {
+            font-size: .95rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, .7);
+            max-width: 440px;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: .8rem;
+            padding: .85rem 2rem;
+            border: 1px solid rgba(255, 255, 255, .3);
+            color: #fff;
+            text-decoration: none;
+            font-size: .78rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            transition: all .3s var(--ease);
+            backdrop-filter: blur(4px);
+        }
+
+        .hero-cta:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #000;
+        }
+
+        .hero-cta svg {
+            transition: transform .3s;
+        }
+
+        .hero-cta:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* slide indicators */
+        .hero-indicators {
+            position: absolute;
+            bottom: 3rem;
+            right: 3rem;
+            z-index: 3;
+            display: flex;
+            gap: .6rem;
+        }
+
+        .hero-dot {
+            width: 28px;
+            height: 2px;
+            background: rgba(255, 255, 255, .3);
+            cursor: pointer;
+            transition: background .3s, width .3s;
+        }
+
+        .hero-dot.active {
+            background: var(--gold);
+            width: 44px;
+        }
+
+        /* hero arrows */
+        .hero-arrow {
+            position: absolute;
+            top: 50%;
+            z-index: 3;
+            transform: translateY(-50%);
+            background: none;
+            border: 1px solid rgba(255, 255, 255, .2);
+            color: #fff;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all .3s;
+            font-size: 1rem;
+        }
+
+        .hero-arrow:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: #000;
+        }
+
+        .hero-arrow.left {
+            left: 5rem;
+        }
+
+        .hero-arrow.right {
+            right: 3rem;
+        }
+
+        /* ── STATS BAND ── */
+        .stats {
+            background: var(--green);
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 2px solid var(--gold);
+        }
+
+        .stat {
+            padding: 3.5rem 2rem;
+            text-align: center;
+            border-right: 1px solid rgba(255, 255, 255, .08);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .6s var(--ease), transform .6s var(--ease);
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .stat:nth-child(2) {
+            transition-delay: .1s;
+        }
+
+        .stat:nth-child(3) {
+            transition-delay: .2s;
+        }
+
+        .stat:nth-child(4) {
+            transition-delay: .3s;
+        }
+
+        .stat-num {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 300;
+            color: var(--gold-lt);
+            line-height: 1;
+            display: block;
+            margin-bottom: .5rem;
+        }
+
+        .stat-label {
+            font-size: .7rem;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+        }
+
+        /* ── TIMELINE BANNER ── */
+        .timeline-banner {
+            position: relative;
+            overflow: hidden;
+            height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timeline-banner img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(.35) saturate(.6);
+        }
+
+        .timeline-inner {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .timeline-inner .eyebrow {
+            font-size: .7rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .timeline-inner h2 {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            font-weight: 300;
+            color: #fff;
+            letter-spacing: -.01em;
+            line-height: 1;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-inner h2 em {
+            font-style: italic;
+            color: var(--gold-lt);
+        }
+
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: .8rem;
+            padding: .9rem 2.2rem;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            text-decoration: none;
+            font-size: .78rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            transition: all .3s var(--ease);
+        }
+
+        .btn-outline:hover {
+            background: var(--gold);
+            color: var(--ink);
+        }
+
+        /* ── NAV CARDS ── */
+        .section-header {
+            text-align: center;
+            padding: 5rem 2rem 3.5rem;
+        }
+
+        .section-header .eyebrow {
+            display: inline-block;
+            font-size: .68rem;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .section-header h2 {
+            font-family: var(--serif);
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 300;
+            letter-spacing: -.01em;
+            color: var(--ink);
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid var(--border);
+            border-left: 1px solid var(--border);
+            margin: 0 0 0 0;
+        }
+
+        .nav-card {
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 3.5rem 3rem;
+            text-decoration: none;
+            color: var(--ink);
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            transition: background .3s var(--ease);
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity .5s var(--ease), transform .5s var(--ease), background .3s;
+        }
+
+        .nav-card.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .nav-card:nth-child(2) {
+            transition-delay: .1s;
+        }
+
+        .nav-card:nth-child(3) {
+            transition-delay: .2s;
+        }
+
+        .nav-card:hover {
+            background: var(--green);
+        }
+
+        .nav-card:hover .card-title,
+        .nav-card:hover .card-desc,
+        .nav-card:hover .card-icon {
+            color: var(--cream);
+        }
+
+        .nav-card:hover .card-arrow {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .card-icon {
+            font-size: 1.8rem;
+            color: var(--green);
+            transition: color .3s;
+            line-height: 1;
+        }
+
+        .card-num {
+            font-family: var(--serif);
+            font-size: .85rem;
+            color: var(--gold);
+            letter-spacing: .06em;
+        }
+
+        .card-title {
+            font-family: var(--serif);
+            font-size: 1.8rem;
+            font-weight: 400;
+            line-height: 1.1;
+            transition: color .3s;
+        }
+
+        .card-desc {
+            font-size: .85rem;
+            line-height: 1.7;
+            color: var(--muted);
+            max-width: 280px;
+            transition: color .3s;
+        }
+
+        .card-arrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid var(--border);
+            margin-top: auto;
+            transition: border-color .3s, color .3s;
+            font-size: .9rem;
+        }
+
+        /* ── QUOTE ── */
+        .quote-section {
+            padding: 7rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--ink);
+        }
+
+        .quote-inner {
+            max-width: 680px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity .8s var(--ease), transform .8s var(--ease);
+        }
+
+        .quote-inner.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .quote-mark {
+            font-family: var(--serif);
+            font-size: 5rem;
+            line-height: .5;
+            color: var(--gold);
+            opacity: .4;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .quote-text {
+            font-family: var(--serif);
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 300;
+            line-height: 1.5;
+            color: var(--cream);
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .quote-source {
+            font-size: .72rem;
+            letter-spacing: .18em;
+            text-transform: uppercase;
+            color: var(--gold);
+            opacity: .7;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--green);
+            padding: 4rem 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, .08);
+        }
+
+        .footer-brand img {
+            height: 90px;
+            opacity: .95;
+        }
+
+        .footer-brand p {
+            font-size: .72rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .4);
+            margin-top: .6rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: .72rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, .5);
+            text-decoration: none;
+            transition: color .25s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold-lt);
+        }
+
+        .footer-logo img {
+            height: 70px;
+            opacity: .75;
+            transition: opacity .25s;
+        }
+
+        .footer-logo:hover img {
+            opacity: 1;
+        }
+
+        /* ── SCROLL REVEAL ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity .7s var(--ease), transform .7s var(--ease);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero::before {
+                display: none;
+            }
+
+            .hero-content {
+                padding: 0 2rem 5rem;
+            }
+
+            .hero-arrow.left {
+                left: 1.5rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat {
+                border-bottom: 1px solid rgba(255, 255, 255, .08);
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                padding: 3rem 2rem;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .hero-content {
+                padding: 0 1.5rem 4rem;
+            }
+
+            .site-header {
+                padding: 1.2rem 1.5rem;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .quote-section {
+                padding: 5rem 1.5rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <header class="site-header">
-        <nav class="navbar">
-            <ul class="nav-left">
-                <li><a href="./index.html" class="active">Página Inicial</a></li>
-                <li><a href="./paginas/linhadoTempo.html">História</a></li>
-                <li><a href="./paginas/galeria.html">Galeria</a></li>
-            </ul>
 
-            <div class="logo-wrap">
-                <a href="index.html" class="logo-link">
-                    <img src="./imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
-                </a>
-            </div>
-
-            <ul class="nav-right">
-                <li><a href="./paginas/textosdeMemorias.html">Memórias</a></li>
-                <li><a href="./paginas/entrevistas.html">Entrevistas</a></li>
-            </ul>
-
-            <button class="hamburger" aria-label="Menu">
-                <span></span><span></span><span></span>
-            </button>
-        </nav>
-    </header>
-
-    <!-- Mobile Menu -->
-    <nav class="mobile-menu">
-        <ul>
-            <li><a href="./index.html">Página Inicial</a></li>
+    <!-- ══ HEADER ══ -->
+    <header class="site-header" id="siteHeader">
+        <a href="./index.html" class="nav-logo">
+            <img src="./imagens/logoprojeto.png" alt="IFC Concórdia">
+            <span>IFC Concórdia</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="./index.html">Início</a></li>
             <li><a href="./paginas/linhadoTempo.html">História</a></li>
             <li><a href="./paginas/galeria.html">Galeria</a></li>
             <li><a href="./paginas/textosdeMemorias.html">Memórias</a></li>
             <li><a href="./paginas/entrevistas.html">Entrevistas</a></li>
         </ul>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <!-- ══ MOBILE MENU ══ -->
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="./index.html">Início</a>
+        <a href="./paginas/linhadoTempo.html">História</a>
+        <a href="./paginas/galeria.html">Galeria</a>
+        <a href="./paginas/textosdeMemorias.html">Memórias</a>
+        <a href="./paginas/entrevistas.html">Entrevistas</a>
     </nav>
 
-    <!-- CINEMATIC HERO -->
-    <section class="carousel">
-        <div class="carousel-track" id="carrossel-1">
-            <div class="slide active">
+    <!-- ══ HERO ══ -->
+    <section class="hero" id="hero">
+        <div class="hero-slides" id="heroSlides">
+            <div class="hero-slide active">
                 <img src="./imagens/depenandoGalinha1969 (1).jpg" alt="Alunos do IFC em 1969">
-                <div class="slide-texto">
-                    <p class="subheading">Legado e Futuro</p>
-                    <h1>IFC Campus Concórdia</h1>
-                    <p>Celebrando 60 anos de excelência na educação profissional e tecnológica no Oeste Catarinense.</p>
-                </div>
             </div>
-
-            <div class="slide">
+            <div class="hero-slide">
                 <img src="./imagens/formaturaPrimeiraTurma (1).jpg" alt="Formatura da primeira turma">
-                <div class="slide-texto">
-                    <p class="subheading">Nossa História</p>
-                    <h1>Uma trajetória de 60 anos</h1>
-                    <p>O campus que transformou a realidade das famílias da região e continua formando profissionais para o mundo.</p>
-                </div>
             </div>
-
-            <div class="slide">
+            <div class="hero-slide">
                 <img src="./imagens/EAgrotecnica.jpg" alt="Escola Agrotécnica Federal">
-                <div class="slide-texto">
-                    <p class="subheading">Tradição & Inovação</p>
-                    <h1>Pioneirismo no Campo</h1>
-                    <p>Ciência aplicada à agricultura familiar e desenvolvimento tecnológico sustentável.</p>
-                </div>
             </div>
         </div>
 
-        <div class="carousel-indicators" id="indicadores-1">
-            <span class="indicator active"></span>
-            <span class="indicator"></span>
-            <span class="indicator"></span>
-        </div>
-
-        <button class="arrow left" onclick="primeiro.slideAnterior()">&#10094;</button>
-        <button class="arrow right" onclick="primeiro.proximoSlide()">&#10095;</button>
-    </section>
-
-    <!-- MODERN STATISTICS -->
-    <section class="secEstimativas reveal">
-        <h1>O Impacto em Números</h1>
-        <p>Ao longo de seis décadas, o IFC Campus Concórdia tornou-se referência em ensino, pesquisa e extensão.</p>
-
-        <div class="secao2estimativas">
-            <div class="estimativa reveal delay-1">
-                <span class="numero counter-number" data-count="5000">0</span>
-                <span class="subheading">Alunos Formados</span>
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span>1964 — 2024 · Campus Concórdia</span>
             </div>
-            <div class="estimativa reveal delay-2">
-                <span class="numero counter-number" data-count="60">0</span>
-                <span class="subheading">Anos de História</span>
-            </div>
-            <div class="estimativa reveal delay-3">
-                <span class="numero counter-number" data-count="200">0</span>
-                <span class="subheading">Servidores</span>
-            </div>
-            <div class="estimativa reveal delay-4">
-                <span class="numero counter-number" data-count="15">0</span>
-                <span class="subheading">Cursos Ativos</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION LINK (CLEANER) -->
-    <section class="secLinhadoTempo parallax-bg reveal" style="background: url('./imagens/EAgrotecnica.jpg') center/cover fixed;">
-        <div style="padding: 12rem 0; background: rgba(0,0,0,0.5); width: 100%; text-align: center;">
-            <p class="subheading" style="color: rgba(255,255,255,0.7); margin-bottom: 2rem;">Explore nossa jornada</p>
-            <h1 style="font-family: 'Montaga', serif; font-size: 4rem; color: #fff; margin-bottom: 3rem;">Linha do Tempo</h1>
-            <a href="./paginas/linhadoTempo.html" class="botao-textomemoria" style="text-decoration: none;">Abrir Linha do Tempo 🡢</a>
-        </div>
-    </section>
-
-    <!-- NAV CARDS -->
-    <section class="secDirecionamentos reveal">
-        <h1 style="text-align: center; font-family: 'Montaga', serif; font-size: 3rem; margin-bottom: 1rem;">Navegue pelo Portal</h1>
-        <div class="direcionamentos">
-            <a href="./paginas/galeria.html" class="direcionamento reveal delay-1">
-                <img src="./imagens/icones/igaleria.png" alt="fotos">
-                <h2>Galeria</h2>
-                <p>Acervo histórico digitalizado abrangendo todas as décadas.</p>
+            <h1>Legado<br><em>em Evolução</em></h1>
+            <p class="hero-desc">Sessenta anos formando profissionais, transformando o Oeste Catarinense e construindo
+                um futuro com raízes firmes.</p>
+            <a href="./paginas/linhadoTempo.html" class="hero-cta">
+                Explorar a história
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
             </a>
-            <a href="./paginas/entrevistas.html" class="direcionamento reveal delay-2">
-                <img src="./imagens/icones/ientrevista.png" alt="entrevistas">
-                <h2>Vozes do Campus</h2>
-                <p>Histórias contadas por quem viveu a evolução do IFC.</p>
-            </a>
-            <a href="./paginas/textosdeMemorias.html" class="direcionamento reveal delay-3">
-                <img src="./imagens/icones/itextos.png" alt="textos">
-                <h2>Memórias</h2>
-                <p>Relatos escritos que preservam a identidade da instituição.</p>
+        </div>
+
+        <div class="hero-indicators" id="heroIndicators">
+            <div class="hero-dot active" onclick="goToSlide(0)"></div>
+            <div class="hero-dot" onclick="goToSlide(1)"></div>
+            <div class="hero-dot" onclick="goToSlide(2)"></div>
+        </div>
+
+        <button class="hero-arrow right" onclick="nextSlide()">&#8594;</button>
+    </section>
+
+    <!-- ══ STATS ══ -->
+    <section class="stats" id="stats">
+        <div class="stat">
+            <span class="stat-num counter" data-target="5000">0</span>
+            <span class="stat-label">Alunos Formados</span>
+        </div>
+        <div class="stat">
+            <span class="stat-num counter" data-target="60">0</span>
+            <span class="stat-label">Anos de História</span>
+        </div>
+        <div class="stat">
+            <span class="stat-num counter" data-target="200">0</span>
+            <span class="stat-label">Servidores</span>
+        </div>
+        <div class="stat">
+            <span class="stat-num counter" data-target="15">0</span>
+            <span class="stat-label">Cursos Ativos</span>
+        </div>
+    </section>
+
+    <!-- ══ TIMELINE BANNER ══ -->
+    <section class="timeline-banner">
+        <img src="./imagens/EAgrotecnica.jpg" alt="Escola Agrotécnica">
+        <div class="timeline-inner reveal">
+            <span class="eyebrow">Nossa trajetória</span>
+            <h2>Linha do<br><em>Tempo</em></h2>
+            <a href="./paginas/linhadoTempo.html" class="btn-outline">
+                Abrir Linha do Tempo
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
             </a>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ══ NAV CARDS ══ -->
+    <div class="section-header reveal">
+        <span class="eyebrow">Explore o portal</span>
+        <h2>Navegue pela História</h2>
+    </div>
+    <section class="cards-grid">
+        <a href="./paginas/galeria.html" class="nav-card">
+            <span class="card-icon">◈</span>
+            <span class="card-num">01</span>
+            <h3 class="card-title">Galeria</h3>
+            <p class="card-desc">Acervo histórico digitalizado com imagens de todas as décadas do campus.</p>
+            <span class="card-arrow">→</span>
+        </a>
+        <a href="./paginas/entrevistas.html" class="nav-card">
+            <span class="card-icon">◎</span>
+            <span class="card-num">02</span>
+            <h3 class="card-title">Vozes do Campus</h3>
+            <p class="card-desc">Histórias e depoimentos de quem viveu a evolução do IFC em primeira pessoa.</p>
+            <span class="card-arrow">→</span>
+        </a>
+        <a href="./paginas/textosdeMemorias.html" class="nav-card">
+            <span class="card-icon">◉</span>
+            <span class="card-num">03</span>
+            <h3 class="card-title">Memórias</h3>
+            <p class="card-desc">Relatos escritos que preservam a identidade e o espírito da instituição.</p>
+            <span class="card-arrow">→</span>
+        </a>
+    </section>
+
+    <!-- ══ QUOTE ══ -->
+    <section class="quote-section">
+        <div class="quote-inner reveal">
+            <span class="quote-mark">"</span>
+            <p class="quote-text">Uma instituição não se mede apenas pelos seus anos, mas pelas vidas que transformou ao
+                longo do caminho.</p>
+            <span class="quote-source">IFC Campus Concórdia · 60 Anos</span>
+        </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
     <footer>
         <div class="footer-brand">
             <img src="./imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
-            <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">IFC Campus Concórdia — 60 Anos de História</p>
+            <p>IFC Campus Concórdia — 60 Anos de História</p>
         </div>
-        <div class="links">
-            <a href="./paginas/entrevistas.html">Vozes</a>
-            <a href="./paginas/galeria.html">Galeria</a>
-            <a href="./paginas/textosdeMemorias.html">Memórias</a>
-            <a href="./paginas/linhadoTempo.html">História</a>
-        </div>
-        <a href="https://concordia.ifc.edu.br/"><img src="./imagens/logo if.png" alt="Logo IFC"></a>
+        <ul class="footer-links">
+            <li><a href="./paginas/entrevistas.html">Vozes</a></li>
+            <li><a href="./paginas/galeria.html">Galeria</a></li>
+            <li><a href="./paginas/textosdeMemorias.html">Memórias</a></li>
+            <li><a href="./paginas/linhadoTempo.html">História</a></li>
+        </ul>
+        <a href="https://concordia.ifc.edu.br/" class="footer-logo" target="_blank">
+            <img src="./imagens/logo if.png" alt="Logo IFC">
+        </a>
     </footer>
 
+    <script>
+        // ── NAVBAR SCROLL ──
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // ── MOBILE MENU ──
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+        });
+
+        // ── HERO CAROUSEL ──
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.hero-dot');
+        let timer;
+
+        function goToSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            dots[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+            clearInterval(timer);
+            timer = setInterval(nextSlide, 6000);
+        }
+        function nextSlide() { goToSlide(currentSlide + 1); }
+        function prevSlide() { goToSlide(currentSlide - 1); }
+        timer = setInterval(nextSlide, 6000);
+
+        // ── SCROLL REVEAL ──
+        const revealEls = document.querySelectorAll('.reveal');
+        const navCards = document.querySelectorAll('.nav-card');
+        const statEls = document.querySelectorAll('.stat');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) { e.target.classList.add('visible'); }
+            });
+        }, { threshold: 0.12 });
+
+        revealEls.forEach(el => observer.observe(el));
+        navCards.forEach(el => observer.observe(el));
+        statEls.forEach(el => observer.observe(el));
+
+        // ── COUNTERS ──
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (!e.isIntersecting) return;
+                const el = e.target;
+                const target = +el.dataset.target;
+                const duration = 1800;
+                const start = performance.now();
+                function tick(now) {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const ease = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.floor(ease * target).toLocaleString('pt-BR');
+                    if (progress < 1) requestAnimationFrame(tick);
+                    else el.textContent = target.toLocaleString('pt-BR');
+                }
+                requestAnimationFrame(tick);
+                counterObserver.unobserve(el);
+            });
+        }, { threshold: 0.3 });
+
+        document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+    </script>
 </body>
+
 </html>
