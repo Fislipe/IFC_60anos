@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../css/animacoes.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="../imagens/logoprojeto.png">
+    <link href="../css/animacoes.css" rel="stylesheet">
     <link href="../css/estilo.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montaga&family=Montserrat:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="../js/animacoes.js" defer></script>
     <title>Pesquisa — IFC 60 Anos</title>
 </head>
-
 <body>
     <header class="site-header">
         <nav class="navbar">
@@ -24,64 +20,40 @@
                 <li><a href="./linhadoTempo.html">História</a></li>
                 <li><a href="./galeria.html">Galeria</a></li>
             </ul>
-
             <div class="logo-wrap">
                 <a href="../../index.html" class="logo-link">
                     <img src="../imagens/logoprojeto.png" alt="IFC Concórdia" class="logo-img">
                 </a>
             </div>
-
             <ul class="nav-right">
-                <li><a href="./textosdeMemorias.html">Textos de memórias</a></li>
+                <li><a href="./textosdeMemorias.html">Memórias</a></li>
                 <li><a href="./entrevistas.html">Entrevistas</a></li>
             </ul>
-
             <button class="hamburger" aria-label="Menu">
                 <span></span><span></span><span></span>
             </button>
         </nav>
     </header>
 
-    <nav class="mobile-menu">
-        <ul>
-            <li><a href="../../index.html">Página Inicial</a></li>
-            <li><a href="./linhadoTempo.html">História</a></li>
-            <li><a href="./galeria.html">Galeria</a></li>
-            <li><a href="./textosdeMemorias.html">Textos de memórias</a></li>
-            <li><a href="./entrevistas.html">Entrevistas</a></li>
-        </ul>
-    </nav>
-
-    <section style="
-        margin-top: 120px;
-        min-height: 60vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 24px;
-        padding: 40px;
-    ">
-        <h1 class="scroll-reveal"
-            style="font-size: clamp(36px, 4.5vw, 60px); color: var(--verde-escuro, #1C5B27); text-align: center;">
-            Pesquisa
-        </h1>
-        <p class="scroll-reveal" style="text-align: center; color: #555; max-width: 600px;">
-            Resultados da pesquisa realizada durante o projeto estarão disponíveis em breve.
-        </p>
-    </section>
+    <main style="padding: 180px 4vw 100px; text-align: center; min-height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+        <p class="subheading reveal">Em desenvolvimento</p>
+        <h1 class="reveal" style="font-family: 'Montaga', serif; font-size: 3.5rem; color: var(--brand-green); margin-bottom: 2rem;">Sistema de Busca</h1>
+        <p class="reveal" style="max-width: 600px; color: var(--text-muted);">Estamos centralizando o acervo digital de 60 anos para buscas inteligentes. Em breve você poderá pesquisar por nomes, datas e eventos específicos.</p>
+        <a href="../../index.html" class="botao-textomemoria reveal delay-1" style="margin-top: 3rem; text-decoration: none;">Voltar ao início</a>
+    </main>
 
     <footer>
-        <img src="../imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
+        <div class="footer-brand">
+            <img src="../imagens/logoprojeto.png" alt="Logo IFC 60 Anos">
+            <p style="margin-top: 1rem; opacity: 0.5; font-size: 0.8rem;">IFC Campus Concórdia — 60 Anos</p>
+        </div>
         <div class="links">
-            <a href="./entrevistas.html">Entrevistas</a>
+            <a href="./entrevistas.html">Vozes</a>
             <a href="./galeria.html">Galeria</a>
-            <a href="./textosdeMemorias.html">Textos de memórias</a>
-            <a href="./linhadoTempo.html">Linha do tempo</a>
-            <a href="mailto:ifcmemorias60@gmail.com">Nosso email</a>
+            <a href="./textosdeMemorias.html">Memórias</a>
+            <a href="./linhadoTempo.html">História</a>
         </div>
         <a href="https://concordia.ifc.edu.br/"><img src="../imagens/logo if.png" alt="Logo IFC"></a>
     </footer>
 </body>
-
 </html>
