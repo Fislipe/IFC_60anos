@@ -182,3 +182,15 @@ O cronograma foi otimizado para **4 Sprints de 2 semanas**, focando em entregas 
   * **Migração de Dados:** Importação automatizada/manual das mídias e textos do site legado para o CMS.
   * Treinamento da equipe do campus para uso do painel administrativo.
   * Homologação final, auditoria de acessibilidade e Deploy em Produção (VPS).
+
+---
+
+## 8. Evolução e Pós-Entrega (Future Roadmap)
+
+Após a entrega final e o lançamento oficial, os seguintes itens de melhoria foram identificados para futuras iterações:
+
+1. **Dockerização da Aplicação:** 
+   - Criação de `Dockerfile` e `docker-compose.yml`.
+   - **Objetivo:** Facilitar o aprendizado, a portabilidade e o deploy rápido em qualquer plataforma com apenas um comando (`docker-compose up`).
+2. **Monitoramento e Otimização:** 
+   - Implementação de monitoramento de performance e análise de logs em produção.
