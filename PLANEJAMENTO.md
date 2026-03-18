@@ -143,7 +143,18 @@ Como se trata de uma instituição federal/pública de educação:
 
 ---
 
-## 5. Cronograma de Execução Detalhado (8 Semanas / 2 Meses)
+## 6. Plano de Reuso de Ativos (Legacy Assets)
+
+Para otimizar o cronograma, o projeto atual (`/site`) será tratado como a nossa **Fonte de Dados Legada (Legacy Data Source)**.
+
+- **Mídias (`/site/imagens`):** Migração direta de arquivos JPEG/PNG para o novo Storage.
+- **Metadados (`/site/dados/galeria.json`):** Base para o script de semente (*seeding*) do banco de dados (anos, décadas, tags).
+- **Conteúdo Textual:** Transcrições de entrevistas e textos de memória serão convertidos em blocos de *RichText* no CMS.
+- **Identidade Visual:** Reaproveitamento das escalas de cores (hex) e tipografia (fuentes) no Tailwind v4.
+
+---
+
+## 7. Cronograma de Execução Detalhado (8 Semanas / 2 Meses)
 
 O cronograma foi otimizado para **4 Sprints de 2 semanas**, focando em entregas funcionais e testes simultâneos.
 
@@ -152,25 +163,22 @@ O cronograma foi otimizado para **4 Sprints de 2 semanas**, focando em entregas 
   * Setup do repositório, Next.js 15 e integração do Payload CMS v3.
   * Provisionamento do PostgreSQL e Storage S3/R2 para mídias.
   * Criação das Collections Relacionais (People, Interviews, Gallery, News).
-  * Refinamento de validações e campos essenciais para o acervo.
+  * **Migração Inicial:** Upload dos logotipos e ícones do site legado.
 
 **Sprint 2: UI Design System e Frontend Core**
   * **Objetivo:** Definir a identidade visual e a estrutura da home.
-  * Configuração do Tailwind v4 e variáveis de cores oficiais do IFC.
+  * Configuração do Tailwind v4 herdando a paleta de cores do site legado.
   * Desenvolvimento dos componentes base (Botões, Cards, Header/Footer acessíveis).
-  * Implementação da Página Inicial (Home) consumindo Banners e Stats dinâmicos do CMS.
-  * Testes de responsividade e performance inicial (Lighthouse).
+  * Implementação da Página Inicial (Home) consumindo Banners e Stats dinâmicos.
 
 **Sprint 3: Funcionalidades de Acervo e Conteúdo Dinâmico**
   * **Objetivo:** Desenvolver as páginas específicas de conteúdo histórico.
-  * Galeria com filtros por década/tags e visualização otimizada.
+  * Galeria com filtros por década/tags (baseado na estrutura do `galeria.json`).
   * Página de Personagens e Custom Player para Entrevistas (Áudio/Vídeo).
   * Seção de Notícias e Marcos do Jubileu.
-  * Auditoria de Acessibilidade (WCAG 2.1 / e-MAG) e correção de contrastes.
 
 **Sprint 4: Migração, QA e Lançamento Final**
   * **Objetivo:** Garantir a entrada do conteúdo e a subida para produção.
+  * **Migração de Dados:** Importação automatizada/manual das mídias e textos do site legado para o CMS.
   * Treinamento da equipe do campus para uso do painel administrativo.
-  * Importação em massa do conteúdo histórico legado e cadastro manual de mídias.
-  * Homologação final (bugs, usabilidade e links quebrados).
-  * Deploy em Produção (VPS Ubuntu + Nginx + PM2) e monitoramento inicial.
+  * Homologação final, auditoria de acessibilidade e Deploy em Produção (VPS).
