@@ -1,0 +1,109 @@
+.filters {
+  padding: 2.5rem 5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.filtersLabel {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.tagsArea {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 0.4rem 1.1rem;
+  border: 1px solid var(--color-border);
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  transition: all 0.25s var(--ease);
+}
+
+.tag:hover {
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.tag.ativo {
+  background: var(--color-green);
+  border-color: var(--color-green);
+  color: var(--color-cream);
+}
+
+.wrapper { padding: 3rem 4rem 6rem; }
+
+.container {
+  columns: 3;
+  column-gap: 1.2rem;
+}
+
+.item {
+  break-inside: avoid;
+  margin-bottom: 1.2rem;
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.item.visible {
+  opacity: 1;
+  transform: none;
+}
+
+.item img {
+  width: 100%;
+  display: block;
+  filter: sepia(0.1) saturate(0.85);
+  transition: transform 0.5s var(--ease), filter 0.3s;
+}
+
+.item:hover img {
+  transform: scale(1.04);
+  filter: sepia(0) saturate(1);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26, 60, 46, 0.8) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: flex-end;
+  padding: 1rem;
+}
+
+.item:hover .overlay { opacity: 1; }
+
+.fotoTag {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold-lt);
+}
+
+@media (max-width: 900px) {
+  .filters { padding: 2rem; }
+  .wrapper { padding: 2rem; }
+  .container { columns: 2; }
+}
+
+@media (max-width: 520px) {
+  .container { columns: 1; }
+}

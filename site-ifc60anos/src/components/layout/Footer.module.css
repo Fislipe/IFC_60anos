@@ -1,0 +1,61 @@
+.footer {
+  background: var(--color-green);
+  padding: 4rem 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.brand img {
+  height: 44px;
+  opacity: 0.85;
+}
+
+.brand p {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 0.6rem;
+}
+
+.links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.links a {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+.links a:hover {
+  color: var(--color-gold-lt);
+}
+
+.ifcLogo img {
+  height: 38px;
+  opacity: 0.6;
+  transition: opacity 0.25s;
+}
+
+.ifcLogo:hover img {
+  opacity: 1;
+}
+
+@media (max-width: 900px) {
+  .footer {
+    flex-direction: column;
+    padding: 3rem 2rem;
+    align-items: flex-start;
+  }
+}
