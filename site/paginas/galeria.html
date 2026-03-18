@@ -521,14 +521,6 @@
         document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
         document.querySelectorAll('.mobile-menu a').forEach(a => a.addEventListener('click', () => document.getElementById('mobileMenu').classList.remove('open')));
 
-        // Tag filter active state
-        document.querySelectorAll('.tag').forEach(tag => {
-            tag.addEventListener('click', function () {
-                document.querySelectorAll('.tag').forEach(t => t.classList.remove('ativo'));
-                this.classList.toggle('ativo');
-            });
-        });
-
         // Observe dynamically added gallery items
         const galleryObs = new MutationObserver(() => {
             document.querySelectorAll('.foto-item:not([data-observed])').forEach(el => {

@@ -24,12 +24,14 @@ document.querySelectorAll(".tag").forEach(tag => {
     tag.addEventListener("click", () => {
         const t = tag.dataset.tag;
 
-        if (tag.classList.contains("selected")) {
-            tag.classList.remove("selected");
+        if (tag.classList.contains("ativo")) {
+            tag.classList.remove("ativo");
             filtrosAtivos = filtrosAtivos.filter(f => f !== t);
         } else {
-            tag.classList.add("selected");
-            filtrosAtivos.push(t);
+            // Remove any previous active filter (only one active at a time)
+            document.querySelectorAll(".tag").forEach(tt => tt.classList.remove("ativo"));
+            filtrosAtivos = [t];
+            tag.classList.add("ativo");
         }
 
         carregarGaleria();
@@ -40,64 +42,47 @@ document.querySelectorAll(".tag").forEach(tag => {
 function carregarGaleria() {
     galeriaContainer.innerHTML = "";
 
-    const decadasMap = {};
-
-    imagens.forEach(img => {
-        const decada = getDecada(img.ano);
-        if (!decadasMap[decada]) decadasMap[decada] = [];
-        decadasMap[decada].push(img);
+    // Filter images
+    const fotosFiltradas = imagens.filter(foto => {
+        if (filtrosAtivos.length === 0) return true;
+        return filtrosAtivos.every(tag => foto.tags.includes(tag));
     });
 
-    const decadasOrdenadas = Object.keys(decadasMap).sort((a, b) => a - b);
+    // Sort by year
+    fotosFiltradas.sort((a, b) => a.ano - b.ano);
 
-    decadasOrdenadas.forEach(decada => {
+    // Render directly into the masonry container — flat structure, no wrappers
+    fotosFiltradas.forEach(foto => {
+        const item = document.createElement("div");
+        item.classList.add("foto-item");
 
-        const fotosFiltradas = decadasMap[decada].filter(foto => {
-            if (filtrosAtivos.length === 0) return true;
-            return filtrosAtivos.every(tag => foto.tags.includes(tag));
-        });
+        const tagsStr = foto.tags.join(' · ');
 
-        if (fotosFiltradas.length === 0) return;
+        item.innerHTML = `
+            <img src="${foto.imagem}" alt="${foto.descricao}">
+            <div class="foto-overlay">
+                <div>
+                    <span class="foto-tag">${foto.ano} — ${tagsStr}</span>
+                </div>
+            </div>
+        `;
 
-        // Título da década
-        const titulo = document.createElement("h2");
-        titulo.classList.add("decada-titulo");
-        titulo.textContent = decada + "s";
-        galeriaContainer.appendChild(titulo);
-
-        // Grid da década
-        const grid = document.createElement("div");
-        grid.classList.add("fotos-grid");
-
-        fotosFiltradas.forEach(foto => {
-            const card = document.createElement("div");
-            card.classList.add("foto-card");
-
-            card.innerHTML = `
-                <img src="${foto.imagem}" alt="${foto.descricao}">
-                <h3 class="foto-ano">${foto.ano}</h3>
-                <p class="foto-desc">${foto.descricao}</p>
-            `;
-
-            grid.appendChild(card);
-        });
-
-        galeriaContainer.appendChild(grid);
+        galeriaContainer.appendChild(item);
     });
 }
 
 
 // imagens:
 
-new Imagens('EAgrotecnica.jpg', 1999, 
+new Imagens('EAgrotecnica.jpg', 1999,
     'Várias pessoas e uma bandeirona do Brasil',
     ["Alunos", "Eventos"]
 );
 
 new Imagens(
-    'depenandoGalinha1969 (1).jpg', 
-    1979, 
-    'Crianças depenando galinhas', 
+    'depenandoGalinha1969 (1).jpg',
+    1979,
+    'Crianças depenando galinhas',
     ["Alunos"]
 );
 
@@ -112,34 +97,14 @@ new Imagens(
     'inauguraçãoCampo.jpg',
     1969,
     'Inauguração do Campo do IFC Concórdia',
-    ["Infraestrutura", "Evento"]
+    ["Infraestrutura", "Eventos"]
 );
 
 new Imagens(
     'formaturaPrimeiraTurma (1).jpg',
     1969,
     'Primeira turma a se formar no IFC Concórdia',
-    ["Alunos", "Evento"]
-);
-new Imagens(
-    'refeitório.jpg',
-    1969,
-    'Refeitório do IFC',
-    ["Infraestrutura"]
-);
-
-new Imagens(
-    'inauguraçãoCampo.jpg',
-    1969,
-    'Inauguração do Campo do IFC Concórdia',
-    ["Infraestrutura", "Evento"]
-);
-
-new Imagens(
-    'formaturaPrimeiraTurma (1).jpg',
-    1969,
-    'Primeira turma a se formar no IFC Concórdia',
-    ["Alunos", "Evento"]
+    ["Alunos", "Eventos"]
 );
 
 carregarGaleria();
