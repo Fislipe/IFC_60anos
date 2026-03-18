@@ -93,7 +93,47 @@ A modelagem foi expandida para incluir campos essenciais de SEO (Slugs), control
 
 ---
 
-## 3. Requisitos Não Funcionais Críticos
+## 3. Organização de Pastas (Feature-Based Architecture)
+
+Para garantir que o projeto seja fácil de manter e escalar, utilizaremos uma organização baseada em **funcionalidades (features)** tanto no frontend quanto no backend.
+
+```text
+/src
+  ├── /app                  # Camada de Roteamento (Next.js App Router)
+  │   ├── (frontend)        # Agrupamento lógico das páginas do site
+  │   │   ├── /galeria      # Funcionalidade de Acervo de Fotos
+  │   │   ├── /entrevistas  # Funcionalidade de História Oral
+  │   │   ├── /noticias     # Funcionalidade de Blog/Notícias
+  │   │   └── /personagens  # Páginas de bios dos personagens
+  │   └── (payload)         # Agrupamento da área administrativa
+  │       └── /admin        # Endpoint do Payload CMS
+  │
+  ├── /collections          # Definições do Backend (Payload CMS)
+  │   ├── /People           # Configuração de campos e hooks de Personagens
+  │   ├── /Interviews       # Configuração de Entrevistas
+  │   ├── /Gallery          # Configuração do Acervo Fotográfico
+  │   └── /News             # Configuração de Notícias
+  │
+  ├── /components           # Biblioteca de Componentes UI
+  │   ├── /common           # Botões, Inputs, Modal (Acessíveis)
+  │   ├── /layout           # Header, Footer, Sidebar
+  │   └── /features         # Componentes vinculados a funcionalidades
+  │       ├── /gallery      # Grid de fotos, filtros por década
+  │       ├── /interviews   # Players de áudio/vídeo customizados
+  │       └── /news         # Cards de notícias, paginação
+  │
+  ├── /lib                  # Utilitários e Integrações
+  │   ├── /api              # Helpers para fetch de dados do Payload
+  │   ├── /utils            # Funções helpers genéricas
+  │   └── /payload          # Inicialização e Configuração do Payload
+  │
+  ├── /styles               # CSS Global e Design System (Tailwind v4)
+  └── /types                # Definições de tipos TypeScript globais
+```
+
+---
+
+## 4. Requisitos Não Funcionais Críticos
 
 Como se trata de uma instituição federal/pública de educação:
 
@@ -103,34 +143,34 @@ Como se trata de uma instituição federal/pública de educação:
 
 ---
 
-## 4. Cronograma de Execução Detalhado
+## 5. Cronograma de Execução Detalhado (8 Semanas / 2 Meses)
 
-O cronograma foi expandido de 4 para 5 Sprints (assumindo sprints de 2 semanas) para garantir estabilidade e testes.
+O cronograma foi otimizado para **4 Sprints de 2 semanas**, focando em entregas funcionais e testes simultâneos.
 
-**Sprint 1: Infraestrutura e Modelagem (Foundation)**
-  * Setup do repositório (Git), ESLint, Prettier.
-  * Configuração do Next.js 15 e integração do Payload CMS v3.
-  * Provisionamento do Banco de Dados (PostgreSQL) e Storage (S3/R2).
-  * Criação das Collections e Globals no Drizzle/Payload.
+**Sprint 1: Infraestrutura e Backend (Foundation & CMS)**
+  * **Objetivo:** Estabelecer o coração do sistema e o painel admin.
+  * Setup do repositório, Next.js 15 e integração do Payload CMS v3.
+  * Provisionamento do PostgreSQL e Storage S3/R2 para mídias.
+  * Criação das Collections Relacionais (People, Interviews, Gallery, News).
+  * Refinamento de validações e campos essenciais para o acervo.
 
-**Sprint 2: Painel Administrativo e API**
-  * Refinamento dos campos e validações do Payload (campos obrigatórios, custom hooks de validação).
-  * Criação das Roles de usuário (Admin, Editor, Revisor).
-  * Testes das rotas REST/GraphQL geradas pelo Payload.
+**Sprint 2: UI Design System e Frontend Core**
+  * **Objetivo:** Definir a identidade visual e a estrutura da home.
+  * Configuração do Tailwind v4 e variáveis de cores oficiais do IFC.
+  * Desenvolvimento dos componentes base (Botões, Cards, Header/Footer acessíveis).
+  * Implementação da Página Inicial (Home) consumindo Banners e Stats dinâmicos do CMS.
+  * Testes de responsividade e performance inicial (Lighthouse).
 
-**Sprint 3: Frontend Web - Core & UI**
-  * Configuração do Tailwind v4 e variáveis de design (Cores do IFC).
-  * Desenvolvimento de Componentes Base (Botões, Cards, Header, Footer).
-  * Implementação da Página Inicial (Home) e Roteamento global.
+**Sprint 3: Funcionalidades de Acervo e Conteúdo Dinâmico**
+  * **Objetivo:** Desenvolver as páginas específicas de conteúdo histórico.
+  * Galeria com filtros por década/tags e visualização otimizada.
+  * Página de Personagens e Custom Player para Entrevistas (Áudio/Vídeo).
+  * Seção de Notícias e Marcos do Jubileu.
+  * Auditoria de Acessibilidade (WCAG 2.1 / e-MAG) e correção de contrastes.
 
-**Sprint 4: Frontend Web - Funcionalidades Específicas**
-  * Páginas de Acervo Fotográfico com sistema de filtros (por década, campus).
-  * Página de Personagens e player customizado para Entrevistas (Áudio/Vídeo).
-  * Página de Notícias.
-  * Auditoria inicial de Acessibilidade (Lighthouse / Axe).
-
-**Sprint 5: Migração de Dados, QA e Lançamento**
-  * Treinamento da equipe do IFC para uso do CMS.
-  * Importação em massa/cadastro do conteúdo histórico.
-  * Homologação (Testes de usabilidade e stress).
-  * Deploy em Produção (Vercel/AWS) e monitoramento pós-lançamento.
+**Sprint 4: Migração, QA e Lançamento Final**
+  * **Objetivo:** Garantir a entrada do conteúdo e a subida para produção.
+  * Treinamento da equipe do campus para uso do painel administrativo.
+  * Importação em massa do conteúdo histórico legado e cadastro manual de mídias.
+  * Homologação final (bugs, usabilidade e links quebrados).
+  * Deploy em Produção (VPS Ubuntu + Nginx + PM2) e monitoramento inicial.
