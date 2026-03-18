@@ -37,7 +37,7 @@ export default function Footer() {
         rel="noopener noreferrer"
       >
         <Image
-          src="/imagens/logo if.png"
+          src="/imagens/logo-if.png"
           alt="Logo IFC"
           width={38}
           height={38}

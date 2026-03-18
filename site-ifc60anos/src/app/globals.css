@@ -10,9 +10,6 @@
   --color-gold-lt: #d4af6a;
   --color-muted: #6b6b5e;
   --color-border: rgba(14, 14, 14, 0.12);
-
-  --font-serif: var(--font-cormorant), Georgia, serif;
-  --font-sans: var(--font-dm-sans), sans-serif;
 }
 
 :root {
@@ -26,6 +23,10 @@ html {
 }
 
 body {
+  /* Font variables defined HERE so they can reference next/font's --font-cormorant & --font-dm-sans */
+  --font-serif: var(--font-cormorant), Georgia, serif;
+  --font-sans: var(--font-dm-sans), sans-serif;
+
   background: var(--color-cream);
   color: var(--color-ink);
   font-family: var(--font-sans);
